@@ -8,6 +8,7 @@ script:
   - npm run lint
   - npm run lint:tsc
   - npm test
+  - npm run test:integration
 after_success:
   - npm run coveralls
 cache:
