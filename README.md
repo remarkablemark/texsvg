@@ -16,11 +16,12 @@ texsvg(string)
 #### Example:
 
 ```js
-import texsvg from 'texsvg';
+const texsvg = require('texsvg');
 
-const svgPromise = texsvg('\\frac{a}{b}');
-svgPromise.then((svg) => console.log(svg));
+texsvg('\\frac{a}{b}').then((svg) => console.log(svg));
 ```
+
+[Node.js](https://repl.it/@remarkablemark/texsvg) | [Server](https://repl.it/@remarkablemark/texsvg-server)
 
 ## Installation
 
@@ -41,11 +42,11 @@ $ yarn add texsvg
 Import module:
 
 ```js
-// ES Modules
-import texsvg from 'texsvg';
-
 // CommonJS
 const texsvg = require('texsvg');
+
+// ES Modules
+import texsvg from 'texsvg';
 ```
 
 Render TeX to SVG using [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise):
