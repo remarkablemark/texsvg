@@ -1,0 +1,4 @@
+{
+  "*.ts": "npm run lint:fix",
+  "*.{css,js,json,md,yml}": "prettier --write"
+}
