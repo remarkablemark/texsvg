@@ -1,6 +1,13 @@
 import mathjax from 'mathjax';
 
-let tex2svg: (tex: string) => string;
+type Tex = string;
+type Svg = string;
+
+interface Tex2svg {
+  (tex: Tex): Svg;
+}
+
+let tex2svg: Tex2svg;
 
 const config = {
   loader: {
@@ -23,7 +30,7 @@ async function texsvg(tex: string): Promise<string> {
   const MathJax = await mathjax.init(config);
   const { adaptor } = MathJax.startup;
 
-  tex2svg = (tex: string): string => adaptor.innerHTML(MathJax.tex2svg(tex));
+  tex2svg = (tex: Tex): Svg => adaptor.innerHTML(MathJax.tex2svg(tex));
 
   const svg = tex2svg(tex);
   return svg;
