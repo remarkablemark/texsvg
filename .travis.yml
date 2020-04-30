@@ -1,0 +1,17 @@
+language: node_js
+node_js:
+  - stable
+install:
+  - npm install
+script:
+  - npx commitlint --from=HEAD~1
+  - npm run lint
+  - npm run lint:tsc
+  - npm test
+after_success:
+  - npm run coveralls
+cache:
+  directories:
+    - node_modules
+notifications:
+  email: false
