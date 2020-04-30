@@ -7,13 +7,14 @@
   "scripts": {
     "build": "tsc --outDir cjs",
     "clean": "rm -rf cjs",
-    "coveralls": "cat coverage/lcov.info | coveralls",
+    "coveralls": "cat src/coverage/lcov.info | coveralls",
     "lint": "eslint --ignore-path .gitignore --ext .js,.ts .",
     "lint:fix": "npm run lint -- --fix",
     "lint:tsc": "tsc --noEmit",
     "prepublishOnly": "npm run lint && npm run lint:tsc && npm test && npm run clean && npm run build",
     "release": "standard-version --no-verify",
-    "test": "jest --coverage",
+    "test": "jest",
+    "test:integration": "npm run build && jest --config=jest.integration.js",
     "test:watch": "npm test -- --watch"
   },
   "homepage": "https://remarkablemark.org/texsvg/",
