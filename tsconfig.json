@@ -2,7 +2,7 @@
   "compilerOptions": {
     "module": "commonjs",
     "target": "es5",
-    "lib": ["es2015"],
+    "lib": ["dom", "es2015"],
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "declaration": true,
