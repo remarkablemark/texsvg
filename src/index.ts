@@ -1,4 +1,7 @@
+import SVGO from 'svgo';
 import mathjax from 'mathjax';
+
+const svgo = new SVGO();
 
 type Tex = string;
 type Svg = string;
@@ -9,7 +12,7 @@ interface Tex2svg {
 
 let tex2svg: Tex2svg;
 
-const config = {
+const mathjaxConfig = {
   loader: {
     load: ['input/tex', 'output/svg'],
   },
@@ -23,17 +26,16 @@ async function texsvg(tex: string): Promise<string> {
     throw 'First argument must be a string';
   }
 
-  if (tex2svg) {
-    return tex2svg(tex);
+  if (!tex2svg) {
+    const MathJax = await mathjax.init(mathjaxConfig);
+    const { adaptor } = MathJax.startup;
+    tex2svg = (tex: Tex): Svg => adaptor.innerHTML(MathJax.tex2svg(tex));
   }
 
-  const MathJax = await mathjax.init(config);
-  const { adaptor } = MathJax.startup;
-
-  tex2svg = (tex: Tex): Svg => adaptor.innerHTML(MathJax.tex2svg(tex));
-
   const svg = tex2svg(tex);
-  return svg;
+
+  const { data } = await svgo.optimize(svg);
+  return data;
 }
 
 texsvg.default = texsvg;
