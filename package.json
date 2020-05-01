@@ -58,5 +58,8 @@
   "files": [
     "cjs/"
   ],
+  "engines": {
+    "node": ">=4"
+  },
   "license": "MIT"
 }
