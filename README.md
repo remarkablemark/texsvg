@@ -7,7 +7,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/remarkablemark/texsvg/badge.svg?branch=master)](https://coveralls.io/github/remarkablemark/texsvg?branch=master)
 [![Dependency status](https://david-dm.org/remarkablemark/texsvg.svg)](https://david-dm.org/remarkablemark/texsvg)
 
-Converts [TeX](https://en.wikipedia.org/wiki/TeX) to [SVG](https://en.wikipedia.org/wiki/Scalable_Vector_Graphics) using [MathJax](https://www.mathjax.org/):
+Converts [TeX](https://en.wikipedia.org/wiki/TeX) to [SVG](https://en.wikipedia.org/wiki/Scalable_Vector_Graphics) using [MathJax](https://www.mathjax.org/) and [SVGO](https://github.com/svg/svgo):
 
 ```
 texsvg(string)
