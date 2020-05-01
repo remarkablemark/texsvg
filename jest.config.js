@@ -1,7 +1,13 @@
+/**
+ * Jest config for unit tests.
+ *
+ * @see https://jestjs.io/docs/en/configuration
+ */
 module.exports = {
+  rootDir: 'src',
+  testEnvironment: 'node',
   preset: 'ts-jest',
-  modulePathIgnorePatterns: ['<rootDir>/cjs/'],
-  coveragePathIgnorePatterns: ['<rootDir>/node_modules/'],
+  collectCoverage: true,
   coverageThreshold: {
     global: {
       branches: 100,

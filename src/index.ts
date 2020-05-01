@@ -1,8 +1,21 @@
+import SVGO from 'svgo';
 import mathjax from 'mathjax';
 
-let tex2svg: (tex: string) => string;
+const svgo = new SVGO();
 
-const config = {
+type Tex = string;
+type Svg = string;
+
+interface Tex2svg {
+  (tex: Tex): Svg;
+}
+
+let tex2svg: Tex2svg;
+
+/**
+ * @see {@link http://docs.mathjax.org/en/latest/web/configuration.html#loading-components-individually}
+ */
+const mathjaxConfig = {
   loader: {
     load: ['input/tex', 'output/svg'],
   },
@@ -10,26 +23,31 @@ const config = {
 
 /**
  * Converts TeX expression to SVG markup.
+ *
+ * @param {string} tex - The TeX.
+ * @return {Promise<string>} - The promise containing the SVG when fulfilled.
  */
-const texsvg = (tex: string): Promise<string> => {
+async function texsvg(tex: string): Promise<string> {
+  // validate argument
   if (typeof tex !== 'string') {
-    return Promise.reject('First argument must be a string');
+    throw 'First argument must be a string';
   }
 
-  if (tex2svg) {
-    return Promise.resolve(tex2svg(tex));
-  }
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return mathjax.init(config).then((MathJax: any) => {
+  // memoize mathjax method
+  if (!tex2svg) {
+    const MathJax = await mathjax.init(mathjaxConfig);
     const { adaptor } = MathJax.startup;
-    tex2svg = (tex: string): string => {
-      return adaptor.innerHTML(MathJax.tex2svg(tex));
-    };
-    return tex2svg(tex);
-  });
-};
+    tex2svg = (tex: Tex): Svg => adaptor.innerHTML(MathJax.tex2svg(tex));
+  }
 
+  // convert TeX to SVG
+  const svg = tex2svg(tex);
+
+  // optimize SVG
+  const { data } = await svgo.optimize(svg);
+  return data;
+}
+
+// support both ES Modules and CommonJS
 texsvg.default = texsvg;
-
 export = texsvg;
