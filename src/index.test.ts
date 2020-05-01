@@ -3,7 +3,9 @@ import mathjax from 'mathjax';
 import texsvg from '.';
 
 jest.mock('svgo', () => {
-  const optimize = jest.fn((input) => Promise.resolve({ data: input }));
+  const optimize = jest.fn((input) =>
+    Promise.resolve({ data: `optimize(${input})` })
+  );
   const SVGOMock = jest.fn(() => ({ optimize }));
   // add `optimize` mock function as a property of `SVGO` mock
   // since a new function is created each time `SVGO` is instantiated
@@ -15,10 +17,10 @@ jest.mock('mathjax', () => ({
   init: jest.fn().mockResolvedValue({
     startup: {
       adaptor: {
-        innerHTML: jest.fn((input) => input),
+        innerHTML: jest.fn((input) => `innerHTML(${input})`),
       },
     },
-    tex2svg: jest.fn((input) => input),
+    tex2svg: jest.fn((input) => `tex2svg(${input})`),
   }),
 }));
 
@@ -46,13 +48,19 @@ describe('texsvg', () => {
   const tex1 = '\\frac{a}{b}';
   const tex2 = '\\x^2';
 
+  it('has a default export', () => {
+    expect(texsvg).toBe(texsvg.default);
+  });
+
   it('uses mathjax to convert TeX to SVG', async () => {
-    expect(await texsvg(tex1)).toBe(tex1);
+    expect(await texsvg(tex1)).toBe(`optimize(innerHTML(tex2svg(${tex1})))`);
     expect(mathjax.init).toHaveBeenCalledWith(mathjaxConfig);
 
     MathJax = await mathjax.init(mathjaxConfig);
     expect(MathJax.tex2svg).toHaveBeenCalledWith(tex1);
-    expect(MathJax.startup.adaptor.innerHTML).toHaveBeenCalledWith(tex1);
+    expect(MathJax.startup.adaptor.innerHTML).toHaveBeenCalledWith(
+      `tex2svg(${tex1})`
+    );
   });
 
   it('does not initialize mathjax more than once', async () => {
@@ -62,7 +70,7 @@ describe('texsvg', () => {
     MathJax.startup.adaptor.innerHTML.mockClear();
 
     // expect memoized function to be called
-    expect(await texsvg(tex2)).toBe(tex2);
+    expect(await texsvg(tex2)).toBe(`optimize(innerHTML(tex2svg(${tex2})))`);
     expect(mathjax.init).not.toHaveBeenCalled();
     expect(MathJax.tex2svg).toHaveBeenCalledTimes(1);
     expect(MathJax.startup.adaptor.innerHTML).toHaveBeenCalledTimes(1);
@@ -73,7 +81,7 @@ describe('texsvg', () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const { optimize } = SVGO as any;
     expect(optimize).toHaveBeenCalledTimes(2);
-    expect(optimize).toHaveBeenCalledWith(tex1);
-    expect(optimize).toHaveBeenCalledWith(tex2);
+    expect(optimize).toHaveBeenCalledWith(`innerHTML(tex2svg(${tex1}))`);
+    expect(optimize).toHaveBeenCalledWith(`innerHTML(tex2svg(${tex2}))`);
   });
 });
