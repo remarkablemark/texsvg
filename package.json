@@ -17,13 +17,12 @@
     "test:integration": "npm run build && jest --config=jest.integration.js",
     "test:watch": "npm test -- --watch"
   },
-  "homepage": "https://remarkablemark.org/texsvg/",
   "repository": {
     "type": "git",
     "url": "https://github.com/remarkablemark/texsvg"
   },
   "bugs": {
-    "url": "https://github.com/remarkablemark/texsvg"
+    "url": "https://github.com/remarkablemark/texsvg/issues"
   },
   "keywords": [
     "tex",
