@@ -6,11 +6,7 @@ const svgo = new SVGO();
 type Tex = string;
 type Svg = string;
 
-interface Tex2svg {
-  (tex: Tex): Svg;
-}
-
-let tex2svg: Tex2svg;
+let tex2svg: (tex: Tex) => Svg;
 
 /**
  * @see {@link http://docs.mathjax.org/en/latest/web/configuration.html#loading-components-individually}
@@ -27,7 +23,7 @@ const mathjaxConfig = {
  * @param {string} tex - The TeX.
  * @return {Promise<string>} - The promise containing the SVG when fulfilled.
  */
-async function texsvg(tex: string): Promise<string> {
+async function texsvg(tex: Tex): Promise<Svg> {
   // validate argument
   if (typeof tex !== 'string') {
     throw 'First argument must be a string';
@@ -35,9 +31,11 @@ async function texsvg(tex: string): Promise<string> {
 
   // memoize mathjax method
   if (!tex2svg) {
-    const MathJax = await mathjax.init(mathjaxConfig);
-    const { adaptor } = MathJax.startup;
-    tex2svg = (tex: Tex): Svg => adaptor.innerHTML(MathJax.tex2svg(tex));
+    const {
+      tex2svg: mathjaxTexToSvg,
+      startup: { adaptor: mathjaxAdaptor },
+    } = await mathjax.init(mathjaxConfig);
+    tex2svg = (tex: Tex): Svg => mathjaxAdaptor.innerHTML(mathjaxTexToSvg(tex));
   }
 
   // convert TeX to SVG
