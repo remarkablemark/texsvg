@@ -46,7 +46,7 @@ Import module:
 const texsvg = require('texsvg');
 
 // ES Modules
-import texsvg from 'texsvg';
+import * as texsvg from 'texsvg';
 ```
 
 Render TeX to SVG using [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise):
