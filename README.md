@@ -13,7 +13,9 @@ Converts [TeX](https://en.wikipedia.org/wiki/TeX) to [SVG](https://en.wikipedia.
 texsvg(string)
 ```
 
-#### Example:
+### Examples
+
+Module:
 
 ```js
 const texsvg = require('texsvg');
@@ -21,9 +23,21 @@ const texsvg = require('texsvg');
 texsvg('\\frac{a}{b}').then((svg) => console.log(svg));
 ```
 
-[Node.js](https://repl.it/@remarkablemark/texsvg) | [Server](https://repl.it/@remarkablemark/texsvg-server)
+CLI:
+
+```sh
+$ texsvg '\frac{a}{b}' fraction.svg
+```
+
+Other:
+
+- [Repl.it (Node.js)](https://repl.it/@remarkablemark/texsvg)
+- [Repl.it (Server)](https://repl.it/@remarkablemark/texsvg-server)
+- [texsvg-server](https://github.com/remarkablemark/texsvg-server)
 
 ## Installation
+
+### Module
 
 [NPM](https://www.npmjs.com/package/texsvg):
 
@@ -37,7 +51,29 @@ $ npm install texsvg --save
 $ yarn add texsvg
 ```
 
+### CLI
+
+NPM:
+
+```sh
+$ npm install texsvg --global
+```
+
+Yarn:
+
+```sh
+$ yarn global add texsvg
+```
+
+NPX:
+
+```sh
+$ npx texsvg
+```
+
 ## Usage
+
+### Module
 
 Import module:
 
@@ -49,7 +85,7 @@ const texsvg = require('texsvg');
 import * as texsvg from 'texsvg';
 ```
 
-Render TeX to SVG using [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise):
+Convert TeX to SVG using [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise):
 
 ```js
 const quadraticFormula = 'x=\\frac{-b\\pm\\sqrt{b^2-4ac}}{2a}';
@@ -59,7 +95,7 @@ texsvg(quadraticFormula)
   .catch((err) => console.error(err));
 ```
 
-Render TeX to SVG using [async-await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise):
+Convert TeX to SVG using [async-await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise):
 
 ```js
 const quadraticFormula = 'x=\\frac{-b\\pm\\sqrt{b^2-4ac}}{2a}';
@@ -72,6 +108,26 @@ const quadraticFormula = 'x=\\frac{-b\\pm\\sqrt{b^2-4ac}}{2a}';
     console.error(err);
   }
 })();
+```
+
+### CLI
+
+Usage:
+
+```sh
+$ texsvg <tex> <file>
+```
+
+Convert TeX to SVG and log result to console:
+
+```sh
+$ texsvg '\frac{a}{b}'
+```
+
+Convert TeX to SVG and save result to file:
+
+```sh
+$ texsvg '\frac{a}{b}' fraction.svg
 ```
 
 ## Testing
