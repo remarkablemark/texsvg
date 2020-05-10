@@ -4,6 +4,9 @@
   "description": "Converts TeX to SVG.",
   "author": "Mark <mark@remarkablemark.org>",
   "main": "cjs/index.js",
+  "bin": {
+    "texsvg": "./cjs/bin.js"
+  },
   "scripts": {
     "build": "tsc --outDir cjs",
     "clean": "rm -rf cjs",
@@ -41,6 +44,7 @@
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^8.3.4",
     "@types/jest": "^25.2.1",
+    "@types/node": "^13.13.5",
     "@typescript-eslint/eslint-plugin": "^2.30.0",
     "@typescript-eslint/parser": "^2.30.0",
     "coveralls": "^3.1.0",
