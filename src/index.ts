@@ -1,5 +1,6 @@
 import SVGO from 'svgo';
 import mathjax from 'mathjax';
+import { mathjax as mathjaxConfig } from './config';
 
 const svgo = new SVGO();
 
@@ -7,15 +8,6 @@ type Tex = string;
 type Svg = string;
 
 let tex2svg: (tex: Tex) => Svg;
-
-/**
- * @see {@link http://docs.mathjax.org/en/latest/web/configuration.html#loading-components-individually}
- */
-const mathjaxConfig = {
-  loader: {
-    load: ['input/tex', 'output/svg'],
-  },
-};
 
 /**
  * Converts TeX expression to SVG markup.
