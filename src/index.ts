@@ -1,8 +1,8 @@
 import SVGO from 'svgo';
 import mathjax from 'mathjax';
-import { mathjax as mathjaxConfig } from './config';
+import { mathjax as mathjaxConfig, svgo as svgoConfig } from './config';
 
-const svgo = new SVGO();
+const svgo = new SVGO(svgoConfig);
 
 type Tex = string;
 type Svg = string;
