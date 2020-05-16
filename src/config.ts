@@ -1,7 +1,9 @@
+import SVGO from 'svgo';
+
 /**
  * @see {@link https://github.com/svg/svgo}
  */
-export const svgo = {
+export const svgo: SVGO.Options = {
   full: true, // skip reading default YAML config
   plugins: [
     // default plugins
