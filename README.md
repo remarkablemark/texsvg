@@ -34,6 +34,7 @@ Other:
 - [Repl.it (Node.js)](https://repl.it/@remarkablemark/texsvg)
 - [Repl.it (Server)](https://repl.it/@remarkablemark/texsvg-server)
 - [texsvg-server](https://github.com/remarkablemark/texsvg-server)
+- [JSFiddle](https://jsfiddle.net/remarkablemark/1k7t6s9o/)
 
 ## Installation
 
