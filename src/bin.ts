@@ -23,7 +23,7 @@ export = texsvg(tex)
     return new Promise((resolve, reject) => {
       writeFile(file, svg, (err) => {
         /* istanbul ignore next */
-        err ? reject(err) : resolve();
+        err ? reject(err) : resolve(undefined);
       });
     });
   })
