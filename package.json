@@ -10,13 +10,13 @@
   "scripts": {
     "build": "tsc --outDir cjs",
     "clean": "rm -rf cjs",
-    "coveralls": "cat src/coverage/lcov.info | coveralls",
     "lint": "eslint --ignore-path .gitignore --ext .js,.ts .",
     "lint:fix": "npm run lint -- --fix",
     "lint:tsc": "tsc --noEmit",
     "prepublishOnly": "npm run lint && npm run lint:tsc && npm test && npm run clean && npm run build",
     "release": "standard-version --no-verify",
     "test": "jest",
+    "test:ci": "jest --coverage --ci",
     "test:integration": "npm run build && jest --config=jest.integration.js",
     "test:watch": "npm test -- --watch"
   },
@@ -47,7 +47,6 @@
     "@types/node": "^13.13.5",
     "@typescript-eslint/eslint-plugin": "^2.30.0",
     "@typescript-eslint/parser": "^2.30.0",
-    "coveralls": "^3.1.0",
     "eslint": "^6.8.0",
     "eslint-plugin-prettier": "^3.1.3",
     "husky": "^4.2.5",
