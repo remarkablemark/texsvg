@@ -17,6 +17,7 @@
     "prepublishOnly": "npm run lint && npm run lint:tsc && npm test && npm run clean && npm run build",
     "release": "standard-version --no-verify",
     "test": "jest",
+    "test:ci": "jest --coverage --ci",
     "test:integration": "npm run build && jest --config=jest.integration.js",
     "test:watch": "npm test -- --watch"
   },
