@@ -3,7 +3,7 @@
 [![NPM](https://nodei.co/npm/texsvg.png)](https://nodei.co/npm/texsvg/)
 
 [![NPM version](https://img.shields.io/npm/v/texsvg.svg)](https://www.npmjs.com/package/texsvg)
-[![Build Status](https://travis-ci.org/remarkablemark/texsvg.svg?branch=master)](https://travis-ci.org/remarkablemark/texsvg)
+[![build](https://github.com/remarkablemark/texsvg/actions/workflows/build.yml/badge.svg)](https://github.com/remarkablemark/texsvg/actions/workflows/build.yml)
 [![Coverage Status](https://coveralls.io/repos/github/remarkablemark/texsvg/badge.svg?branch=master)](https://coveralls.io/github/remarkablemark/texsvg?branch=master)
 [![Dependency status](https://david-dm.org/remarkablemark/texsvg.svg)](https://david-dm.org/remarkablemark/texsvg)
 
