@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.3.1](https://github.com/remarkablemark/texsvg/compare/v1.3.0...v1.3.1) (2021-05-03)
+
+
+### Bug Fixes
+
+* **package:** bump mathjax version ([c60ad61](https://github.com/remarkablemark/texsvg/commit/c60ad6198a09347efc80375afaa4fdea455cbce9))
+
 ## [1.3.0](https://github.com/remarkablemark/texsvg/compare/v1.2.0...v1.3.0) (2020-05-16)
 
 ### Features
