@@ -26,7 +26,7 @@ texsvg('\\frac{a}{b}').then((svg) => console.log(svg));
 CLI:
 
 ```sh
-$ texsvg '\frac{a}{b}' fraction.svg
+texsvg '\frac{a}{b}' fraction.svg
 ```
 
 Other:
@@ -43,13 +43,13 @@ Other:
 [NPM](https://www.npmjs.com/package/texsvg):
 
 ```sh
-$ npm install texsvg --save
+npm install texsvg
 ```
 
 [Yarn](https://yarnpkg.com/package/texsvg):
 
 ```sh
-$ yarn add texsvg
+yarn add texsvg
 ```
 
 ### CLI
@@ -57,19 +57,19 @@ $ yarn add texsvg
 NPM:
 
 ```sh
-$ npm install texsvg --global
+npm install --global texsvg
 ```
 
 Yarn:
 
 ```sh
-$ yarn global add texsvg
+yarn global add texsvg
 ```
 
 NPX:
 
 ```sh
-$ npx texsvg
+npx texsvg
 ```
 
 ## Usage
@@ -86,22 +86,12 @@ const texsvg = require('texsvg');
 import * as texsvg from 'texsvg';
 ```
 
-Convert TeX to SVG using [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise):
+Convert TeX to SVG using [async-await](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/async_function):
 
 ```js
 const quadraticFormula = 'x=\\frac{-b\\pm\\sqrt{b^2-4ac}}{2a}';
 
-texsvg(quadraticFormula)
-  .then((svg) => console.log(svg))
-  .catch((err) => console.error(err));
-```
-
-Convert TeX to SVG using [async-await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise):
-
-```js
-const quadraticFormula = 'x=\\frac{-b\\pm\\sqrt{b^2-4ac}}{2a}';
-
-(async function () {
+(async () => {
   try {
     const svg = await texsvg(quadraticFormula);
     console.log(svg);
@@ -111,24 +101,34 @@ const quadraticFormula = 'x=\\frac{-b\\pm\\sqrt{b^2-4ac}}{2a}';
 })();
 ```
 
+Convert TeX to SVG using [Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise):
+
+```js
+const quadraticFormula = 'x=\\frac{-b\\pm\\sqrt{b^2-4ac}}{2a}';
+
+texsvg(quadraticFormula)
+  .then((svg) => console.log(svg))
+  .catch((err) => console.error(err));
+```
+
 ### CLI
 
 Usage:
 
 ```sh
-$ texsvg <tex> <file>
+texsvg <tex> <file>
 ```
 
 Convert TeX to SVG and log result to console:
 
 ```sh
-$ texsvg '\frac{a}{b}'
+texsvg '\frac{a}{b}'
 ```
 
 Convert TeX to SVG and save result to file:
 
 ```sh
-$ texsvg '\frac{a}{b}' fraction.svg
+texsvg '\frac{a}{b}' fraction.svg
 ```
 
 ## Testing
@@ -136,32 +136,32 @@ $ texsvg '\frac{a}{b}' fraction.svg
 Run tests with coverage:
 
 ```sh
-$ npm test
+npm test
 ```
 
 Run tests in watch mode:
 
 ```sh
-$ npm run test:watch
+npm run test:watch
 ```
 
 Run integration tests:
 
 ```sh
-$ npm run test:integration
+npm run test:integration
 ```
 
 Lint files:
 
 ```sh
-$ npm run lint
-$ npm run lint:tsc
+npm run lint
+npm run lint:tsc
 ```
 
 Fix lint errors:
 
 ```sh
-$ npm run lint:fix
+npm run lint:fix
 ```
 
 ## Release
@@ -169,8 +169,8 @@ $ npm run lint:fix
 Only collaborators with credentials can release and publish:
 
 ```sh
-$ npm run release
-$ git push --follow-tags && npm publish
+npm run release
+git push --follow-tags && npm publish
 ```
 
 ## License
