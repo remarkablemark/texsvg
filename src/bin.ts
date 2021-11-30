@@ -21,12 +21,12 @@ export = texsvg(tex)
     }
 
     return new Promise((resolve, reject) => {
-      writeFile(file, svg, (err) => {
+      writeFile(file, svg, (error) => {
         /* istanbul ignore next */
-        err ? reject(err) : resolve(undefined);
+        error ? reject(error) : resolve(undefined);
       });
     });
   })
-  .catch((err) => {
-    console.error(err);
+  .catch((error) => {
+    console.error(error);
   });
