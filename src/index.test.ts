@@ -1,17 +1,11 @@
-import SVGO from 'svgo';
+import { optimize } from 'svgo';
 import mathjax from 'mathjax';
 import texsvg from '.';
+import { svgoOptimizeOptions } from './config';
 
-jest.mock('svgo', () => {
-  const optimize = jest.fn((input) =>
-    Promise.resolve({ data: `optimize(${input})` })
-  );
-  const SVGOMock = jest.fn(() => ({ optimize }));
-  // add `optimize` mock function as a property of `SVGO` mock
-  // since a new function is created each time `SVGO` is instantiated
-  (SVGOMock as jest.Mock & { optimize: jest.Mock }).optimize = optimize;
-  return SVGOMock;
-});
+jest.mock('svgo', () => ({
+  optimize: jest.fn((input) => ({ data: `optimize(${input})` })),
+}));
 
 jest.mock('mathjax', () => ({
   init: jest.fn().mockResolvedValue({
@@ -24,18 +18,29 @@ jest.mock('mathjax', () => ({
   }),
 }));
 
-describe.each([undefined, null, 0, 1, {}, [Array], Function, new Date()])(
-  'invalid argument: %p',
-  (argument) => {
-    it('is rejected', async () => {
-      try {
-        await texsvg(argument as string);
-      } catch (error) {
-        expect(error).toBe('First argument must be a string');
-      }
-    });
-  }
-);
+beforeEach(() => {
+  (optimize as jest.Mock).mockClear();
+});
+
+describe.each([
+  undefined,
+  null,
+  0,
+  1,
+  {},
+  [Array],
+  Function,
+  new Date(),
+  new Set(),
+  Symbol(),
+  new Map(),
+])('invalid argument: %p', (argument) => {
+  it('is rejected', async () => {
+    await expect(async () => {
+      await texsvg(argument as string);
+    }).rejects.toThrowError(new TypeError('First argument must be a string'));
+  });
+});
 
 describe('texsvg', () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -77,11 +82,11 @@ describe('texsvg', () => {
   });
 
   it('optimizes SVG with svgo', async () => {
-    expect(SVGO).toHaveBeenCalledTimes(1);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const { optimize } = SVGO as any;
-    expect(optimize).toHaveBeenCalledTimes(2);
-    expect(optimize).toHaveBeenCalledWith(`innerHTML(tex2svg(${tex1}))`);
-    expect(optimize).toHaveBeenCalledWith(`innerHTML(tex2svg(${tex2}))`);
+    expect(await texsvg(tex2)).toBe(`optimize(innerHTML(tex2svg(${tex2})))`);
+    expect(optimize).toBeCalledTimes(1);
+    expect(optimize).toBeCalledWith(
+      `innerHTML(tex2svg(${tex2}))`,
+      svgoOptimizeOptions
+    );
   });
 });
