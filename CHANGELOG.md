@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://www.github.com/remarkablemark/texsvg/compare/v1.3.1...v1.4.0) (2021-11-30)
+
+
+### Features
+
+* upgrade to svgo@2.8.0 ([4af91cd](https://www.github.com/remarkablemark/texsvg/commit/4af91cdf03ca1044c8a38716192f202447d2d08c))
+
 ### [1.3.1](https://github.com/remarkablemark/texsvg/compare/v1.3.0...v1.3.1) (2021-05-03)
 
 
