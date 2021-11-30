@@ -4,9 +4,6 @@
  * @see https://jestjs.io/docs/en/configuration
  */
 module.exports = {
-  rootDir: 'src',
-  testEnvironment: 'node',
-  preset: 'ts-jest',
   collectCoverage: true,
   coverageThreshold: {
     global: {
@@ -16,4 +13,7 @@ module.exports = {
       statements: 100,
     },
   },
+  preset: 'ts-jest',
+  rootDir: 'src',
+  testEnvironment: 'node',
 };
