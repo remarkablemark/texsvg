@@ -1,127 +1,60 @@
-import SVGO from 'svgo';
+import type { OptimizeOptions } from 'svgo';
 
 /**
  * @see {@link https://github.com/svg/svgo}
  */
-export const svgo: SVGO.Options = {
-  full: true, // skip reading default YAML config
+export const svgoOptimizeOptions: OptimizeOptions = {
   plugins: [
     // default plugins
-    {
-      cleanupAttrs: true,
-    },
-    {
-      inlineStyles: true,
-    },
-    {
-      removeDoctype: true,
-    },
-    {
-      removeXMLProcInst: true,
-    },
-    {
-      removeComments: true,
-    },
-    {
-      removeMetadata: true,
-    },
-    {
-      removeTitle: true,
-    },
-    {
-      removeDesc: true,
-    },
-    {
-      removeUselessDefs: true,
-    },
-    {
-      removeEditorsNSData: true,
-    },
-    {
-      removeEmptyAttrs: true,
-    },
-    {
-      removeHiddenElems: true,
-    },
-    {
-      removeEmptyText: true,
-    },
-    {
-      removeEmptyContainers: true,
-    },
-    {
-      removeViewBox: true,
-    },
-    {
-      cleanupEnableBackground: true,
-    },
-    {
-      minifyStyles: true,
-    },
-    {
-      convertStyleToAttrs: true,
-    },
-    {
-      convertColors: true,
-    },
-    {
-      convertPathData: true,
-    },
-    {
-      convertTransform: true,
-    },
-    {
-      removeUnknownsAndDefaults: true,
-    },
-    {
-      removeNonInheritableGroupAttrs: true,
-    },
-    {
-      removeUselessStrokeAndFill: true,
-    },
-    {
-      removeUnusedNS: true,
-    },
-    {
-      cleanupIDs: true,
-    },
-    {
-      cleanupNumericValues: true,
-    },
-    {
-      moveElemsAttrsToGroup: true,
-    },
-    {
-      moveGroupAttrsToElems: true,
-    },
-    {
-      collapseGroups: true,
-    },
-    {
-      mergePaths: true,
-    },
-    {
-      convertShapeToPath: true,
-    },
-    {
-      convertEllipseToCircle: true,
-    },
-    {
-      sortDefsChildren: true,
-    },
+    'cleanupAttrs',
+    'inlineStyles',
+    'removeDoctype',
+    'removeXMLProcInst',
+    'removeComments',
+    'removeMetadata',
+    'removeTitle',
+    'removeDesc',
+    'removeUselessDefs',
+    'removeEditorsNSData',
+    'removeEmptyAttrs',
+    'removeHiddenElems',
+    'removeEmptyText',
+    'removeEmptyContainers',
+    'removeViewBox',
+    'cleanupEnableBackground',
+    'minifyStyles',
+    'convertStyleToAttrs',
+    'convertColors',
+    'convertPathData',
+    'convertTransform',
+    'removeUnknownsAndDefaults',
+    'removeNonInheritableGroupAttrs',
+    'removeUselessStrokeAndFill',
+    'removeUnusedNS',
+    'cleanupIDs',
+    'cleanupNumericValues',
+    'moveElemsAttrsToGroup',
+    'moveGroupAttrsToElems',
+    'collapseGroups',
+    'mergePaths',
+    'convertShapeToPath',
+    'convertEllipseToCircle',
+    'sortDefsChildren',
 
     // new plugins
     {
       // remove mathjax data attribute
-      removeAttrs: { attrs: '(data-mml-node)' },
+      name: 'removeAttrs',
+      params: { attrs: '(data-mml-node)' },
     },
   ],
 };
 
 /**
+ * @see {@link https://github.com/mathjax/MathJax#using-mathjax-components-in-a-node-application}
  * @see {@link http://docs.mathjax.org/en/latest/web/configuration.html#loading-components-individually}
  */
-export const mathjax = {
+export const mathjaxInitOptions = {
   loader: {
     load: ['input/tex', 'output/svg'],
   },
