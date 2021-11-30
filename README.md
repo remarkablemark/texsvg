@@ -30,8 +30,8 @@ texsvg '\frac{a}{b}' fraction.svg
 
 Other:
 
-- [Repl.it (Node.js)](https://repl.it/@remarkablemark/texsvg)
-- [Repl.it (Server)](https://repl.it/@remarkablemark/texsvg-server)
+- [Replit (Node.js)](https://replit.com/@remarkablemark/texsvg)
+- [Replit (Server)](https://replit.com/@remarkablemark/texsvg-server)
 - [texsvg-server](https://github.com/remarkablemark/texsvg-server)
 - [JSFiddle](https://jsfiddle.net/remarkablemark/1k7t6s9o/)
 
