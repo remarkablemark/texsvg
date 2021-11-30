@@ -5,9 +5,8 @@
 [![NPM version](https://img.shields.io/npm/v/texsvg.svg)](https://www.npmjs.com/package/texsvg)
 [![build](https://github.com/remarkablemark/texsvg/actions/workflows/build.yml/badge.svg)](https://github.com/remarkablemark/texsvg/actions/workflows/build.yml)
 [![Coverage Status](https://coveralls.io/repos/github/remarkablemark/texsvg/badge.svg?branch=master)](https://coveralls.io/github/remarkablemark/texsvg?branch=master)
-[![Dependency status](https://david-dm.org/remarkablemark/texsvg.svg)](https://david-dm.org/remarkablemark/texsvg)
 
-Converts [TeX](https://en.wikipedia.org/wiki/TeX) to [SVG](https://en.wikipedia.org/wiki/Scalable_Vector_Graphics) using [MathJax](https://www.mathjax.org/) and [SVGO](https://github.com/svg/svgo):
+Converts [TeX](https://wikipedia.org/wiki/TeX) to [SVG](https://wikipedia.org/wiki/Scalable_Vector_Graphics) using [MathJax](https://www.mathjax.org/) and [SVGO](https://github.com/svg/svgo):
 
 ```
 texsvg(string)
@@ -166,12 +165,7 @@ npm run lint:fix
 
 ## Release
 
-Only collaborators with credentials can release and publish:
-
-```sh
-npm run release
-git push --follow-tags && npm publish
-```
+Release is automated with [Release Please](https://github.com/googleapis/release-please).
 
 ## License
 
