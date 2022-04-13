@@ -12,9 +12,5 @@ updates:
       interval: 'daily'
 
     # Optional
-    assignees:
-      - 'remarkablemark'
     labels:
       - 'dependencies'
-    reviewers:
-      - 'remarkablemark'
