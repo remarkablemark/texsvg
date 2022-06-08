@@ -38,7 +38,7 @@
     "formula"
   ],
   "dependencies": {
-    "@types/svgo": "2.6.0",
+    "@types/svgo": "2.6.3",
     "mathjax": "3.2.2",
     "svgo": "2.8.0"
   },
