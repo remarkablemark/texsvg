@@ -1,4 +1,5 @@
 import { optimize } from 'svgo';
+import type { OptimizedError } from 'svgo';
 import mathjax from 'mathjax';
 import texsvg from '.';
 import { svgoOptimizeOptions } from './config';
@@ -18,8 +19,10 @@ jest.mock('mathjax', () => ({
   }),
 }));
 
+const mockedOptimize = jest.mocked(optimize);
+
 beforeEach(() => {
-  (optimize as jest.Mock).mockClear();
+  mockedOptimize.mockClear();
 });
 
 describe.each([
@@ -59,11 +62,11 @@ describe('texsvg', () => {
 
   it('uses mathjax to convert TeX to SVG', async () => {
     expect(await texsvg(tex1)).toBe(`optimize(innerHTML(tex2svg(${tex1})))`);
-    expect(mathjax.init).toHaveBeenCalledWith(mathjaxConfig);
+    expect(mathjax.init).toBeCalledWith(mathjaxConfig);
 
     MathJax = await mathjax.init(mathjaxConfig);
-    expect(MathJax.tex2svg).toHaveBeenCalledWith(tex1);
-    expect(MathJax.startup.adaptor.innerHTML).toHaveBeenCalledWith(
+    expect(MathJax.tex2svg).toBeCalledWith(tex1);
+    expect(MathJax.startup.adaptor.innerHTML).toBeCalledWith(
       `tex2svg(${tex1})`
     );
   });
@@ -76,9 +79,9 @@ describe('texsvg', () => {
 
     // expect memoized function to be called
     expect(await texsvg(tex2)).toBe(`optimize(innerHTML(tex2svg(${tex2})))`);
-    expect(mathjax.init).not.toHaveBeenCalled();
-    expect(MathJax.tex2svg).toHaveBeenCalledTimes(1);
-    expect(MathJax.startup.adaptor.innerHTML).toHaveBeenCalledTimes(1);
+    expect(mathjax.init).not.toBeCalled();
+    expect(MathJax.tex2svg).toBeCalledTimes(1);
+    expect(MathJax.startup.adaptor.innerHTML).toBeCalledTimes(1);
   });
 
   it('optimizes SVG with svgo', async () => {
@@ -88,5 +91,11 @@ describe('texsvg', () => {
       `innerHTML(tex2svg(${tex2}))`,
       svgoOptimizeOptions
     );
+  });
+
+  it('throws error', async () => {
+    const error = 'Error';
+    mockedOptimize.mockReturnValueOnce({ error } as OptimizedError);
+    await expect(texsvg(tex2)).rejects.toBe(error);
   });
 });
