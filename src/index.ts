@@ -1,4 +1,5 @@
 import { optimize } from 'svgo';
+import type { OptimizedError, OptimizedSvg } from 'svgo';
 import mathjax from 'mathjax';
 import { mathjaxInitOptions, svgoOptimizeOptions } from './config';
 
@@ -8,7 +9,7 @@ let tex2svg: (tex: string) => string;
  * Converts TeX expression to SVG markup.
  *
  * @param tex - The TeX string.
- * @return - The promise containing the SVG when fulfilled.
+ * @returns - The promise containing the SVG when fulfilled.
  */
 async function texsvg(tex: string): Promise<string> {
   if (typeof tex !== 'string') {
@@ -24,7 +25,12 @@ async function texsvg(tex: string): Promise<string> {
 
   const svg = tex2svg(tex);
   const result = optimize(svg, svgoOptimizeOptions);
-  return result.data;
+
+  if ((result as OptimizedError).error) {
+    throw result.error;
+  }
+
+  return (result as OptimizedSvg).data;
 }
 
 // support both ES Modules and CommonJS

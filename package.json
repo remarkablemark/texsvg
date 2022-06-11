@@ -16,7 +16,7 @@
     "postinstall": "husky install",
     "postpublish": "pinst --enable",
     "prepublishOnly": "pinst --disable && npm run lint && npm run lint:tsc && npm test && npm run clean && npm run build",
-    "test": "jest",
+    "test": "jest --colors",
     "test:ci": "jest --coverage --ci",
     "test:integration": "npm run build && jest --config=jest.integration.ts",
     "test:watch": "npm test -- --watch"
@@ -37,7 +37,7 @@
     "formula"
   ],
   "dependencies": {
-    "@types/svgo": "2.6.0",
+    "@types/svgo": "2.6.3",
     "mathjax": "3.2.2",
     "svgo": "2.8.0"
   },
