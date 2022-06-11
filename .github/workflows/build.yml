@@ -4,11 +4,10 @@ on: [push, pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
@@ -20,9 +19,6 @@ jobs:
 
       - name: Run ESLint
         run: npm run lint
-
-      - name: Lint TypeScript
-        run: npm run lint:tsc
 
       - name: Compile TypeScript
         run: npm run build
