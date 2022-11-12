@@ -1,5 +1,4 @@
 import { optimize } from 'svgo';
-import type { OptimizedError } from 'svgo';
 import mathjax from 'mathjax';
 import texsvg from '.';
 import { svgoOptimizeOptions } from './config';
@@ -91,11 +90,5 @@ describe('texsvg', () => {
       `innerHTML(tex2svg(${tex2}))`,
       svgoOptimizeOptions
     );
-  });
-
-  it('throws error', async () => {
-    const error = 'Error';
-    mockedOptimize.mockReturnValueOnce({ error } as OptimizedError);
-    await expect(texsvg(tex2)).rejects.toBe(error);
   });
 });

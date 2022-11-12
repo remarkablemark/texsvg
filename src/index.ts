@@ -1,5 +1,4 @@
 import { optimize } from 'svgo';
-import type { OptimizedError, OptimizedSvg } from 'svgo';
 import mathjax from 'mathjax';
 import { mathjaxInitOptions, svgoOptimizeOptions } from './config';
 
@@ -26,11 +25,7 @@ async function texsvg(tex: string): Promise<string> {
   const svg = tex2svg(tex);
   const result = optimize(svg, svgoOptimizeOptions);
 
-  if ((result as OptimizedError).error) {
-    throw result.error;
-  }
-
-  return (result as OptimizedSvg).data;
+  return result.data;
 }
 
 // support both ES Modules and CommonJS
