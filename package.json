@@ -37,13 +37,13 @@
     "formula"
   ],
   "dependencies": {
-    "@types/svgo": "2.6.4",
     "mathjax": "3.2.2",
-    "svgo": "2.8.0"
+    "svgo": "3.0.1"
   },
   "devDependencies": {
     "@commitlint/cli": "17.2.0",
     "@commitlint/config-conventional": "17.2.0",
+    "@types/csso": "5.0.0",
     "@types/jest": "29.2.2",
     "@types/node": "18.11.9",
     "@typescript-eslint/eslint-plugin": "5.42.1",
@@ -62,7 +62,7 @@
     "cjs/"
   ],
   "engines": {
-    "node": ">=4"
+    "node": ">=14"
   },
   "license": "MIT"
 }

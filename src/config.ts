@@ -1,9 +1,9 @@
-import type { OptimizeOptions } from 'svgo';
+import type { Config } from 'svgo';
 
 /**
  * @see {@link https://github.com/svg/svgo}
  */
-export const svgoOptimizeOptions: OptimizeOptions = {
+export const svgoOptimizeOptions: Config = {
   plugins: [
     // default plugins
     'cleanupAttrs',
@@ -31,7 +31,7 @@ export const svgoOptimizeOptions: OptimizeOptions = {
     'removeNonInheritableGroupAttrs',
     'removeUselessStrokeAndFill',
     'removeUnusedNS',
-    'cleanupIDs',
+    'cleanupIds',
     'cleanupNumericValues',
     'moveElemsAttrsToGroup',
     'moveGroupAttrsToElems',
