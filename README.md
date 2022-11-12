@@ -4,7 +4,7 @@
 
 [![NPM version](https://img.shields.io/npm/v/texsvg.svg)](https://www.npmjs.com/package/texsvg)
 [![build](https://github.com/remarkablemark/texsvg/actions/workflows/build.yml/badge.svg)](https://github.com/remarkablemark/texsvg/actions/workflows/build.yml)
-[![Coverage Status](https://coveralls.io/repos/github/remarkablemark/texsvg/badge.svg?branch=master)](https://coveralls.io/github/remarkablemark/texsvg?branch=master)
+[![codecov](https://codecov.io/gh/remarkablemark/texsvg/branch/master/graph/badge.svg?token=BC34P2RTJB)](https://codecov.io/gh/remarkablemark/texsvg)
 
 Converts [TeX](https://wikipedia.org/wiki/TeX) to [SVG](https://wikipedia.org/wiki/Scalable_Vector_Graphics) using [MathJax](https://www.mathjax.org/) and [SVGO](https://github.com/svg/svgo):
 
