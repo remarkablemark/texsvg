@@ -29,8 +29,5 @@ jobs:
       - name: Run integration tests
         run: npm run test:integration
 
-      - name: Coveralls
-        uses: coverallsapp/github-action@master
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          path-to-lcov: src/coverage/lcov.info
+      - name: Codecov
+        uses: codecov/codecov-action@v3
