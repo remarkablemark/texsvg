@@ -2,23 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [2.0.1](https://github.com/remarkablemark/texsvg/compare/v2.0.0...v2.0.1) (2022-11-18)
+## 2.0.2 (2023-04-12)
 
+### Miscellaneous Chores
+
+- version bump only for texsvg ([daa1865](https://github.com/remarkablemark/texsvg/commit/daa18654622b7c42aa075bb3a54b77602c20bfcd))
 
 ### Build System
 
-* **deps:** bump svgo from 3.0.1 to 3.0.2 ([1fca8fe](https://github.com/remarkablemark/texsvg/commit/1fca8fe21e60d97b075a7f1488789620bced64a0))
+- **deps:** bump svgo from 3.0.1 to 3.0.2 ([1fca8fe](https://github.com/remarkablemark/texsvg/commit/1fca8fe21e60d97b075a7f1488789620bced64a0))
 
 ## [2.0.0](https://github.com/remarkablemark/texsvg/compare/v1.5.1...v2.0.0) (2022-11-12)
 
-
 ### ⚠ BREAKING CHANGES
 
-* **deps:** Node.js 14+ is required for version
+- **deps:** Node.js 14+ is required for version
 
 ### Build System
 
-* **deps:** bump svgo from 2.8.0 to 3.0.1 ([fb4fc2b](https://github.com/remarkablemark/texsvg/commit/fb4fc2b425a24e56191ade02a150108c133144ca))
+- **deps:** bump svgo from 2.8.0 to 3.0.1 ([fb4fc2b](https://github.com/remarkablemark/texsvg/commit/fb4fc2b425a24e56191ade02a150108c133144ca))
 
 ## [1.5.1](https://github.com/remarkablemark/texsvg/compare/v1.5.0...v1.5.1) (2022-08-17)
 
