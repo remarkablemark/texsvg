@@ -66,7 +66,7 @@ describe('texsvg', () => {
     MathJax = await mathjax.init(mathjaxConfig);
     expect(MathJax.tex2svg).toBeCalledWith(tex1);
     expect(MathJax.startup.adaptor.innerHTML).toBeCalledWith(
-      `tex2svg(${tex1})`
+      `tex2svg(${tex1})`,
     );
   });
 
@@ -88,7 +88,7 @@ describe('texsvg', () => {
     expect(optimize).toBeCalledTimes(1);
     expect(optimize).toBeCalledWith(
       `innerHTML(tex2svg(${tex2}))`,
-      svgoOptimizeOptions
+      svgoOptimizeOptions,
     );
   });
 });
