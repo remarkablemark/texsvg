@@ -75,14 +75,16 @@ npx texsvg
 
 ### Module
 
-Import module:
+Import with ES Modules:
 
 ```js
-// CommonJS
-const texsvg = require('texsvg');
-
-// ES Modules
 import * as texsvg from 'texsvg';
+```
+
+Or require with CommonJS:
+
+```js
+const texsvg = require('texsvg');
 ```
 
 Convert TeX to SVG using [async-await](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/async_function):
