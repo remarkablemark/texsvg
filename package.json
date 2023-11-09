@@ -3,10 +3,11 @@
   "version": "2.0.3",
   "description": "Converts TeX to SVG.",
   "author": "Mark <mark@remarkablemark.org>",
-  "main": "cjs/index.js",
+  "main": "./cjs/index.js",
   "bin": {
     "texsvg": "./cjs/bin.js"
   },
+  "types": "./cjs/index.d.ts",
   "scripts": {
     "build": "tsc --outDir cjs",
     "clean": "rm -rf cjs",
