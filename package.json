@@ -42,7 +42,7 @@
     "svgo": "3.0.3"
   },
   "devDependencies": {
-    "@commitlint/cli": "18.4.0",
+    "@commitlint/cli": "18.4.1",
     "@commitlint/config-conventional": "18.4.0",
     "@types/jest": "29.5.8",
     "@types/node": "20.9.0",
