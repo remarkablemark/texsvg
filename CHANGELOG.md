@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.7](https://github.com/remarkablemark/texsvg/compare/v2.0.6...v2.0.7) (2023-12-16)
+
+
+### Build System
+
+* **deps:** bump svgo from 3.0.5 to 3.1.0 ([#448](https://github.com/remarkablemark/texsvg/issues/448)) ([cc008fe](https://github.com/remarkablemark/texsvg/commit/cc008fe19578315a700e315d42ac71aa879e51a3))
+
 ## [2.0.6](https://github.com/remarkablemark/texsvg/compare/v2.0.5...v2.0.6) (2023-12-02)
 
 
