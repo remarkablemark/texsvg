@@ -7,7 +7,6 @@
   "bin": {
     "texsvg": "./cjs/bin.js"
   },
-  "types": "./cjs/index.d.ts",
   "scripts": {
     "build": "tsc --outDir cjs",
     "clean": "rm -rf cjs",
