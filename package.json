@@ -18,8 +18,8 @@
     "postpublish": "pinst --enable",
     "prepublishOnly": "pinst --disable && npm run lint && npm run lint:tsc && npm test && npm run clean && npm run build",
     "test": "jest --colors",
-    "test:ci": "jest --coverage --ci",
-    "test:integration": "npm run build && jest --config=jest.integration.ts",
+    "test:ci": "CI=true npm test -- --coverage --ci",
+    "test:integration": "npm run build && npm test -- --config=jest.integration.ts",
     "test:watch": "npm test -- --watch"
   },
   "repository": {
@@ -39,7 +39,7 @@
   ],
   "dependencies": {
     "mathjax": "3.2.2",
-    "svgo": "3.1.0"
+    "svgo": "3.2.0"
   },
   "devDependencies": {
     "@commitlint/cli": "18.4.4",
