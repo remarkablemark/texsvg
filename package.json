@@ -37,7 +37,7 @@
   ],
   "dependencies": {
     "mathjax": "3.2.2",
-    "svgo": "3.3.0"
+    "svgo": "3.3.2"
   },
   "devDependencies": {
     "@commitlint/cli": "19.3.0",
