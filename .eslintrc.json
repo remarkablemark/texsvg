@@ -3,6 +3,7 @@
   "extends": ["plugin:@typescript-eslint/recommended"],
   "plugins": ["@typescript-eslint", "prettier"],
   "rules": {
+    "@typescript-eslint/no-require-imports": "off",
     "no-console": "error",
     "no-debugger": "error",
     "prettier/prettier": "error"
