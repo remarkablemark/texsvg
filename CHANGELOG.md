@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.2.2](https://github.com/remarkablemark/texsvg/compare/v2.2.1...v2.2.2) (2024-08-29)
+
+
+### Continuous Integration
+
+* **github:** publish package to npm registry with provenance ([8048fcf](https://github.com/remarkablemark/texsvg/commit/8048fcf796300d882ceaeb46208bd24a8153c05f))
+
 ## [2.2.1](https://github.com/remarkablemark/texsvg/compare/v2.2.0...v2.2.1) (2024-05-09)
 
 
