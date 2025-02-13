@@ -44,6 +44,9 @@ describe.each([
   });
 });
 
+const tex1 = '\\frac{a}{b}';
+const tex2 = '\\x^2';
+
 describe('texsvg', () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let MathJax: any;
@@ -52,8 +55,6 @@ describe('texsvg', () => {
       load: ['input/tex', 'output/svg'],
     },
   };
-  const tex1 = '\\frac{a}{b}';
-  const tex2 = '\\x^2';
 
   it('has a default export', () => {
     expect(texsvg).toBe(texsvg.default);
@@ -61,11 +62,11 @@ describe('texsvg', () => {
 
   it('uses mathjax to convert TeX to SVG', async () => {
     expect(await texsvg(tex1)).toBe(`optimize(innerHTML(tex2svg(${tex1})))`);
-    expect(mathjax.init).toBeCalledWith(mathjaxConfig);
+    expect(mathjax.init).toHaveBeenCalledWith(mathjaxConfig);
 
     MathJax = await mathjax.init(mathjaxConfig);
-    expect(MathJax.tex2svg).toBeCalledWith(tex1);
-    expect(MathJax.startup.adaptor.innerHTML).toBeCalledWith(
+    expect(MathJax.tex2svg).toHaveBeenCalledWith(tex1);
+    expect(MathJax.startup.adaptor.innerHTML).toHaveBeenCalledWith(
       `tex2svg(${tex1})`,
     );
   });
@@ -78,17 +79,26 @@ describe('texsvg', () => {
 
     // expect memoized function to be called
     expect(await texsvg(tex2)).toBe(`optimize(innerHTML(tex2svg(${tex2})))`);
-    expect(mathjax.init).not.toBeCalled();
-    expect(MathJax.tex2svg).toBeCalledTimes(1);
-    expect(MathJax.startup.adaptor.innerHTML).toBeCalledTimes(1);
+    expect(mathjax.init).not.toHaveBeenCalled();
+    expect(MathJax.tex2svg).toHaveBeenCalledTimes(1);
+    expect(MathJax.startup.adaptor.innerHTML).toHaveBeenCalledTimes(1);
   });
 
   it('optimizes SVG with svgo', async () => {
     expect(await texsvg(tex2)).toBe(`optimize(innerHTML(tex2svg(${tex2})))`);
-    expect(optimize).toBeCalledTimes(1);
-    expect(optimize).toBeCalledWith(
+    expect(optimize).toHaveBeenCalledTimes(1);
+    expect(optimize).toHaveBeenCalledWith(
       `innerHTML(tex2svg(${tex2}))`,
       svgoOptimizeOptions,
     );
+  });
+});
+
+describe('optimize', () => {
+  it('does not optimize SVG with svgo', async () => {
+    expect(await texsvg(tex2, { optimize: false })).toBe(
+      `innerHTML(tex2svg(${tex2}))`,
+    );
+    expect(optimize).not.toHaveBeenCalled();
   });
 });
