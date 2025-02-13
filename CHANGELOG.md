@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0](https://github.com/remarkablemark/texsvg/compare/v2.2.2...v2.3.0) (2025-02-13)
+
+
+### Features
+
+* add option optimize to library and binary (defaults to true) ([0d6f9fb](https://github.com/remarkablemark/texsvg/commit/0d6f9fbf8220f98109bf508084c4f71a2d7110f3))
+
 ## [2.2.2](https://github.com/remarkablemark/texsvg/compare/v2.2.1...v2.2.2) (2024-08-29)
 
 
