@@ -9,7 +9,7 @@
   },
   "scripts": {
     "build": "tsc --outDir cjs",
-    "clean": "rm -rf cjs",
+    "clean": "rm -rf cjs src/coverage",
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix",
     "lint:tsc": "tsc --noEmit",
@@ -17,7 +17,7 @@
     "prepublishOnly": "npm run lint && npm run lint:tsc && npm test && npm run clean && npm run build",
     "test": "jest --colors",
     "test:ci": "CI=true npm test -- --coverage --ci",
-    "test:integration": "npm run build && npm test -- --config=jest.config.integration.ts",
+    "test:integration": "npm run build && npm test -- --config=jest.config.integration.ts && node --test test",
     "test:watch": "npm test -- --watch"
   },
   "repository": {
