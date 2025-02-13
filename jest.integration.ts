@@ -1,10 +1,9 @@
-/**
- * Jest config for integration tests.
- *
- * @see https://jestjs.io/docs/en/configuration
- */
-module.exports = {
+import type { Config } from 'jest';
+
+const config: Config = {
   preset: 'ts-jest',
   rootDir: 'test',
   testEnvironment: 'node',
 };
+
+export default config;

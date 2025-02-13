@@ -1,9 +1,6 @@
-/**
- * Jest config for unit tests.
- *
- * @see https://jestjs.io/docs/en/configuration
- */
-module.exports = {
+import type { Config } from 'jest';
+
+const config: Config = {
   collectCoverage: true,
   coverageThreshold: {
     global: {
@@ -17,3 +14,5 @@ module.exports = {
   rootDir: 'src',
   testEnvironment: 'node',
 };
+
+export default config;
