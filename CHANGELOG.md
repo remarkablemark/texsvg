@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.1](https://github.com/remarkablemark/texsvg/compare/v2.3.0...v2.3.1) (2025-02-13)
+
+
+### Bug Fixes
+
+* remove `convertPathData` from svgo config ([b1455d0](https://github.com/remarkablemark/texsvg/commit/b1455d0182c39573736999285eda21923539db81)), closes [#762](https://github.com/remarkablemark/texsvg/issues/762)
+
 ## [2.3.0](https://github.com/remarkablemark/texsvg/compare/v2.2.2...v2.3.0) (2025-02-13)
 
 
