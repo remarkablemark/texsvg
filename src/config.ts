@@ -25,7 +25,6 @@ export const svgoOptimizeOptions: Config = {
     'minifyStyles',
     'convertStyleToAttrs',
     'convertColors',
-    'convertPathData',
     'convertTransform',
     'removeUnknownsAndDefaults',
     'removeNonInheritableGroupAttrs',
