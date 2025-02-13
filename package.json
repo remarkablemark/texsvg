@@ -17,7 +17,7 @@
     "prepublishOnly": "npm run lint && npm run lint:tsc && npm test && npm run clean && npm run build",
     "test": "jest --colors",
     "test:ci": "CI=true npm test -- --coverage --ci",
-    "test:integration": "npm run build && npm test -- --config=jest.integration.ts",
+    "test:integration": "npm run build && npm test -- --config=jest.config.integration.ts",
     "test:watch": "npm test -- --watch"
   },
   "repository": {
