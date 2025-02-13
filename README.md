@@ -105,6 +105,12 @@ texsvg(quadraticFormula)
   .catch((err) => console.error(err));
 ```
 
+Convert TeX to SVG without optimization:
+
+```js
+texsvg('8', { optimize: false });
+```
+
 ### CLI
 
 Usage:
@@ -117,6 +123,12 @@ Convert TeX to SVG and log result to console:
 
 ```sh
 texsvg '\frac{a}{b}'
+```
+
+Convert TeX to SVG without optimization:
+
+```sh
+texsvg '\frac{a}{b}' --optimize=false
 ```
 
 Convert TeX to SVG and save result to file:

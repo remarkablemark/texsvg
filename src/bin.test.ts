@@ -7,15 +7,15 @@ jest.mock('fs', () => ({
 const texsvg = jest.fn((value) => Promise.resolve(value));
 jest.mock('.', () => texsvg);
 
-let consoleError: jest.SpyInstance;
-let consoleLog: jest.SpyInstance;
-let processExit: jest.SpyInstance;
+let consoleErrorSpy: jest.SpyInstance;
+let consoleLogSpy: jest.SpyInstance;
+let processExitSpy: jest.SpyInstance;
 
 beforeAll(() => {
   // mock implementation to override default behavior (prevent exit or log)
-  consoleError = jest.spyOn(console, 'error').mockImplementation();
-  consoleLog = jest.spyOn(console, 'log').mockImplementation();
-  processExit = jest.spyOn(process, 'exit').mockImplementation();
+  consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation();
+  consoleLogSpy = jest.spyOn(console, 'log').mockImplementation();
+  processExitSpy = jest.spyOn(process, 'exit').mockImplementation();
 });
 
 const { argv } = process;
@@ -30,16 +30,19 @@ describe('bin', () => {
   const tex = 'tex';
   const file = 'file.svg';
 
-  afterEach(() => {
+  beforeEach(() => {
     jest.clearAllMocks();
   });
 
   it('exits with error when no arguments are passed', () => {
-    jest.isolateModules(() => {
+    jest.isolateModules(async () => {
       process.argv = processArgv;
-      require('./bin');
-      expect(processExit).toBeCalledWith(9);
-      expect(consoleError).toBeCalledWith('Usage: texsvg <tex> <file>');
+      await require('./bin');
+      expect(processExitSpy).toHaveBeenCalledWith(1);
+      expect(consoleErrorSpy).toHaveBeenCalledWith(
+        expect.stringContaining('<tex> [file] [options]'),
+      );
+      expect(consoleErrorSpy).toHaveBeenCalledWith('TeX string is required');
     });
   });
 
@@ -47,21 +50,32 @@ describe('bin', () => {
     jest.isolateModules(async () => {
       process.argv = [...processArgv, tex];
       await require('./bin');
-      expect(processExit).not.toBeCalled();
-      expect(texsvg).toBeCalledWith(tex);
-      expect(consoleLog).toBeCalledWith(tex);
+      expect(processExitSpy).not.toHaveBeenCalled();
+      expect(texsvg).toHaveBeenCalledWith(tex, { optimize: true });
+      expect(consoleLogSpy).toHaveBeenCalledWith(tex);
+      done();
+    });
+  });
+
+  it('disables SVG optimization with option --optimize=false', (done) => {
+    jest.isolateModules(async () => {
+      process.argv = [...processArgv, tex, '--optimize=false'];
+      await require('./bin');
+      expect(processExitSpy).not.toHaveBeenCalled();
+      expect(texsvg).toHaveBeenCalledWith(tex, { optimize: false });
+      expect(consoleLogSpy).toHaveBeenCalledWith(tex);
       done();
     });
   });
 
   it('saves SVG to file when 2 arguments are passed', (done) => {
     jest.isolateModules(async () => {
-      process.argv = [...processArgv, tex, file];
+      process.argv = [...processArgv, tex, file, file];
       await require('./bin');
-      expect(processExit).not.toBeCalled();
-      expect(texsvg).toBeCalledWith(tex);
-      expect(consoleLog).not.toBeCalled();
-      expect(writeFile).toBeCalledWith(file, tex, expect.any(Function));
+      expect(processExitSpy).not.toHaveBeenCalled();
+      expect(texsvg).toHaveBeenCalledWith(tex, { optimize: true });
+      expect(consoleLogSpy).not.toHaveBeenCalled();
+      expect(writeFile).toHaveBeenCalledWith(file, tex, expect.any(Function));
       done();
     });
   });
@@ -72,11 +86,11 @@ describe('bin', () => {
       texsvg.mockRejectedValueOnce(error);
       process.argv = [...processArgv, tex];
       await require('./bin');
-      expect(processExit).not.toBeCalled();
-      expect(texsvg).toBeCalledWith(tex);
-      expect(consoleLog).not.toBeCalled();
-      expect(writeFile).not.toBeCalled();
-      expect(consoleError).toBeCalledWith(error);
+      expect(processExitSpy).not.toHaveBeenCalled();
+      expect(texsvg).toHaveBeenCalledWith(tex, { optimize: true });
+      expect(consoleLogSpy).not.toHaveBeenCalled();
+      expect(writeFile).not.toHaveBeenCalled();
+      expect(consoleErrorSpy).toHaveBeenCalledWith(error);
       done();
     });
   });

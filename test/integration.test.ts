@@ -6,7 +6,6 @@ import texsvg from '../cjs';
 
 const { readFile, unlink } = promises;
 const execPromise = promisify(exec);
-const bin = resolve(__dirname, '../cjs/bin.js');
 
 describe('texsvg', () => {
   it('can be required using CommonJS or imported using ES Modules', () => {
@@ -40,13 +39,13 @@ describe('bin', () => {
     const tex = 'x=\\frac{-b\\pm\\sqrt{b^2-4ac}}{2a}';
     process.argv = [...processArgv, tex];
     await require('../cjs/bin');
-    expect(consoleLog).toBeCalledWith(await texsvg(tex));
+    expect(consoleLog).toHaveBeenCalledWith(await texsvg(tex));
   });
 
   it('saves SVG to file when 2 arguments are passed ', async () => {
+    const bin = resolve(__dirname, '../cjs/bin.js');
     const tex = 'x';
-    const file = 'test.svg';
-
+    const file = resolve(__dirname, 'test.svg');
     await execPromise(`node ${bin} ${tex} ${file}`);
     const svg = await readFile(file, 'utf8');
     await unlink(file);
