@@ -6,34 +6,27 @@
 [![build](https://github.com/remarkablemark/texsvg/actions/workflows/build.yml/badge.svg)](https://github.com/remarkablemark/texsvg/actions/workflows/build.yml)
 [![codecov](https://codecov.io/gh/remarkablemark/texsvg/branch/master/graph/badge.svg?token=BC34P2RTJB)](https://codecov.io/gh/remarkablemark/texsvg)
 
-Converts [TeX](https://wikipedia.org/wiki/TeX) to [SVG](https://wikipedia.org/wiki/Scalable_Vector_Graphics) using [MathJax](https://www.mathjax.org/) and [SVGO](https://github.com/svg/svgo):
+Convert [TeX](https://wikipedia.org/wiki/TeX) to [SVG](https://wikipedia.org/wiki/Scalable_Vector_Graphics) using [MathJax](https://www.mathjax.org/) and [SVGO](https://github.com/svg/svgo):
 
 ```
 texsvg(string)
 ```
 
-### Examples
+## Quick Start
 
-Module:
+CLI:
+
+```sh
+npx texsvg '\frac{a}{b}' fraction.svg
+```
+
+Script:
 
 ```js
 const texsvg = require('texsvg');
 
 texsvg('\\frac{a}{b}').then((svg) => console.log(svg));
 ```
-
-CLI:
-
-```sh
-texsvg '\frac{a}{b}' fraction.svg
-```
-
-Other:
-
-- [Replit (Node.js)](https://replit.com/@remarkablemark/texsvg)
-- [Replit (Server)](https://replit.com/@remarkablemark/texsvg-server)
-- [texsvg-server](https://github.com/remarkablemark/texsvg-server)
-- [JSFiddle](https://jsfiddle.net/remarkablemark/1k7t6s9o/)
 
 ## Installation
 
@@ -78,7 +71,7 @@ npx texsvg
 Import with ES Modules:
 
 ```js
-import * as texsvg from 'texsvg';
+import texsvg from 'texsvg';
 ```
 
 Or require with CommonJS:
@@ -164,6 +157,13 @@ Fix lint errors:
 ```sh
 npm run lint:fix
 ```
+
+## Examples
+
+- [StackBlitz (Script)](https://stackblitz.com/edit/texsvg)
+- [StackBlitz (Server)](https://stackblitz.com/edit/texsvg-server)
+- [texsvg-server](https://github.com/remarkablemark/texsvg-server)
+- [JSFiddle](https://jsfiddle.net/remarkablemark/1k7t6s9o/)
 
 ## Release
 
