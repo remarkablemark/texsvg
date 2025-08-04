@@ -40,7 +40,7 @@ describe.each([
   it('is rejected', async () => {
     await expect(async () => {
       await texsvg(argument as string);
-    }).rejects.toThrowError(new TypeError('First argument must be a string'));
+    }).rejects.toThrow(new TypeError('First argument must be a string'));
   });
 });
 

@@ -10,7 +10,12 @@ const config: Config = {
       statements: 100,
     },
   },
+  moduleFileExtensions: ['js', 'ts'],
   preset: 'ts-jest',
+  reporters:
+    process.env.CI === 'true'
+      ? [['github-actions', { silent: false }], 'summary']
+      : undefined,
   rootDir: 'src',
   testEnvironment: 'node',
 };
