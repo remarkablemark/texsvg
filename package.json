@@ -36,7 +36,7 @@
     "formula"
   ],
   "dependencies": {
-    "mathjax": "3.2.2",
+    "mathjax": "4.1.0",
     "svgo": "4.0.0",
     "yargs": "17"
   },
