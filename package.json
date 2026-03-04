@@ -37,7 +37,7 @@
   ],
   "dependencies": {
     "mathjax": "3.2.2",
-    "svgo": "4.0.0",
+    "svgo": "4.0.1",
     "yargs": "17"
   },
   "devDependencies": {
