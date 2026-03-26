@@ -1,24 +1,21 @@
 name: Assign Reviewer
 on: pull_request_target
 
-permissions:
-  pull-requests: write
+permissions: read-all
 
 jobs:
   assign-reviewer:
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v6
-
       - name: Assign reviewer
         if: >
-          github.actor != 'dependabot[bot]'
-          && startsWith(github.event.pull_request.title, 'build(deps-dev): bump ') == false
+          startsWith(github.event.pull_request.title, 'build(deps-dev): bump ') == false
           && contains(github.event.action, 'opened')
         run: >
-          gh pr edit ${{ github.event.number }}
+          gh pr edit ${{ github.event.pull_request.html_url }}
           --add-assignee ${{ github.event.pull_request.user.login }}
           --add-reviewer remarkablemark
         env:
