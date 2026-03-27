@@ -15,12 +15,12 @@
   },
   "scripts": {
     "build": "tsc --project tsconfig.build.json",
-    "clean": "rm -rf cjs src/coverage",
+    "clean": "rm -rf cjs coverage",
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix",
     "lint:tsc": "tsc --project tsconfig.test.json",
     "prepare": "husky",
-    "prepublishOnly": "npm run lint && npm run lint:tsc && npm test && npm run clean && npm run build",
+    "prepublishOnly": "npm run clean && npm run build && npm run lint && npm run lint:tsc && npm test",
     "test": "npm run build && jest --colors",
     "test:ci": "CI=true npm test -- --coverage --ci",
     "test:watch": "npm test -- --watch"
