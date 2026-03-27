@@ -2,7 +2,7 @@ import { promises } from 'fs';
 import { exec } from 'child_process';
 import { promisify } from 'util';
 import { resolve } from 'path';
-import texsvg from '../cjs';
+import texsvg from '../cjs/index.js';
 
 const { readFile, unlink } = promises;
 const execPromise = promisify(exec);
@@ -38,7 +38,8 @@ describe('bin', () => {
     // quadratic formula
     const tex = 'x=\\frac{-b\\pm\\sqrt{b^2-4ac}}{2a}';
     process.argv = [...processArgv, tex];
-    await require('../cjs/bin');
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    require('../cjs/bin.js');
     expect(consoleLog).toHaveBeenCalledWith(await texsvg(tex));
   });
 

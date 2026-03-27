@@ -1,14 +1,7 @@
 {
-  "compilerOptions": {
-    "module": "commonjs",
-    "target": "es5",
-    "lib": ["dom", "es2015"],
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "declaration": true,
-    "strict": true,
-    "removeComments": true
-  },
-  "include": ["src"],
-  "exclude": ["node_modules", "**/*.test.ts"]
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.build.json" },
+    { "path": "./tsconfig.test.json" }
+  ]
 }

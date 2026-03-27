@@ -2,6 +2,7 @@ import type { Config } from 'jest';
 
 const config: Config = {
   collectCoverage: true,
+  collectCoverageFrom: ['src/**/*.{js,ts}'],
   coverageThreshold: {
     global: {
       branches: 100,
@@ -16,8 +17,14 @@ const config: Config = {
     process.env.CI === 'true'
       ? [['github-actions', { silent: false }], 'summary']
       : undefined,
-  rootDir: 'src',
-  testEnvironment: 'node',
+  transform: {
+    '^.+\\.tsx?$': [
+      'ts-jest',
+      {
+        tsconfig: 'tsconfig.test.json',
+      },
+    ],
+  },
 };
 
 export default config;
