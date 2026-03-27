@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.3](https://github.com/remarkablemark/texsvg/compare/v3.0.2...v3.0.3) (2026-03-27)
+
+
+### Build System
+
+* **package:** fix script prepublishOnly ([19b2f62](https://github.com/remarkablemark/texsvg/commit/19b2f62477753e94a120d4362b1e453d123fb941))
+
 ## [3.0.2](https://github.com/remarkablemark/texsvg/compare/v3.0.1...v3.0.2) (2026-03-27)
 
 
