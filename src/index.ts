@@ -2,7 +2,7 @@ import { optimize } from 'svgo';
 import mathjax from 'mathjax';
 import { mathjaxInitOptions, svgoOptimizeOptions } from './config';
 
-let tex2svg: (tex: string) => string;
+let tex2svg: ((tex: string) => string) | undefined;
 
 /**
  * Converts TeX expression to SVG markup.
@@ -21,6 +21,7 @@ async function texsvg(
 
   if (!tex2svg) {
     const MathJax = await mathjax.init(mathjaxInitOptions);
+
     // memoize
     tex2svg = (tex: string) =>
       MathJax.startup.adaptor.innerHTML(MathJax.tex2svg(tex));

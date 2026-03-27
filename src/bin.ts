@@ -52,6 +52,6 @@ export = texsvg(tex, { optimize })
       });
     });
   })
-  .catch((error) => {
+  .catch((error: unknown) => {
     console.error(error);
   });

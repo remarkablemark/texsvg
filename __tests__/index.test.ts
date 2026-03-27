@@ -1,24 +1,38 @@
 import { optimize } from 'svgo';
 import mathjax from 'mathjax';
-import texsvg from '.';
-import { svgoOptimizeOptions } from './config';
+import texsvg from '../src';
+import { svgoOptimizeOptions } from '../src/config';
 
 jest.mock('svgo', () => ({
-  optimize: jest.fn((input) => ({ data: `optimize(${input})` })),
+  optimize: jest.fn((input) => ({ data: `optimize(${String(input)})` })),
 }));
 
-jest.mock('mathjax', () => ({
-  init: jest.fn().mockResolvedValue({
+jest.mock('mathjax', () => {
+  const tex2svgMock = jest.fn((input) => `tex2svg(${String(input)})`);
+  const innerHTMLMock = jest.fn((input) => `innerHTML(${String(input)})`);
+  const initMock = jest.fn().mockResolvedValue({
     startup: {
       adaptor: {
-        innerHTML: jest.fn((input) => `innerHTML(${input})`),
+        innerHTML: innerHTMLMock,
       },
     },
-    tex2svg: jest.fn((input) => `tex2svg(${input})`),
-  }),
-}));
+    tex2svg: tex2svgMock,
+  });
+  return {
+    init: initMock,
+    __mocks: { tex2svg: tex2svgMock, innerHTML: innerHTMLMock, init: initMock },
+  };
+});
 
 const mockedOptimize = jest.mocked(optimize);
+const mockedMathjax = jest.mocked(mathjax);
+// Access the internal mocks from mathjax module
+
+const mathjaxMocks = (
+  mathjax as unknown as {
+    __mocks: { tex2svg: jest.Mock; innerHTML: jest.Mock; init: jest.Mock };
+  }
+).__mocks;
 
 beforeEach(() => {
   mockedOptimize.mockClear();
@@ -48,8 +62,6 @@ const tex1 = '\\frac{a}{b}';
 const tex2 = '\\x^2';
 
 describe('texsvg', () => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  let MathJax: any;
   const mathjaxConfig = {
     loader: {
       load: ['input/tex', 'output/svg'],
@@ -64,7 +76,7 @@ describe('texsvg', () => {
     expect(await texsvg(tex1)).toBe(`optimize(innerHTML(tex2svg(${tex1})))`);
     expect(mathjax.init).toHaveBeenCalledWith(mathjaxConfig);
 
-    MathJax = await mathjax.init(mathjaxConfig);
+    const MathJax = await mathjax.init(mathjaxConfig);
     expect(MathJax.tex2svg).toHaveBeenCalledWith(tex1);
     expect(MathJax.startup.adaptor.innerHTML).toHaveBeenCalledWith(
       `tex2svg(${tex1})`,
@@ -72,16 +84,20 @@ describe('texsvg', () => {
   });
 
   it('does not initialize mathjax more than once', async () => {
-    // clear mathjax mocks
-    mathjax.init.mockClear();
-    MathJax.tex2svg.mockClear();
-    MathJax.startup.adaptor.innerHTML.mockClear();
+    // First call to initialize mathjax
+    await texsvg(tex1);
 
-    // expect memoized function to be called
-    expect(await texsvg(tex2)).toBe(`optimize(innerHTML(tex2svg(${tex2})))`);
-    expect(mathjax.init).not.toHaveBeenCalled();
-    expect(MathJax.tex2svg).toHaveBeenCalledTimes(1);
-    expect(MathJax.startup.adaptor.innerHTML).toHaveBeenCalledTimes(1);
+    // clear call counts to test memoization
+    mockedMathjax.init.mockClear();
+    mathjaxMocks.tex2svg.mockClear();
+    mathjaxMocks.innerHTML.mockClear();
+
+    // expect memoized function to be called (no new init call)
+    const result2 = await texsvg(tex2);
+    expect(result2).toBe(`optimize(innerHTML(tex2svg(${tex2})))`);
+    expect(mockedMathjax.init).not.toHaveBeenCalled();
+    expect(mathjaxMocks.tex2svg).toHaveBeenCalledTimes(1);
+    expect(mathjaxMocks.innerHTML).toHaveBeenCalledTimes(1);
   });
 
   it('optimizes SVG with svgo', async () => {

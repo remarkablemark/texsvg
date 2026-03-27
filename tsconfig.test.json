@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.build.json",
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "noEmit": true,
+    "allowJs": true,
+    "isolatedModules": true
+  },
+  "include": ["__tests__", "cjs", "src", "*.mjs", "*.mts", "*.ts"]
+}

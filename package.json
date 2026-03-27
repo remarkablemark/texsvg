@@ -3,21 +3,26 @@
   "version": "3.0.1",
   "description": "Converts TeX to SVG.",
   "author": "Mark <mark@remarkablemark.org>",
+  "funding": [
+    {
+      "type": "github",
+      "url": "https://github.com/sponsors/remarkablemark"
+    }
+  ],
   "main": "./cjs/index.js",
   "bin": {
     "texsvg": "cjs/bin.js"
   },
   "scripts": {
-    "build": "tsc --outDir cjs",
+    "build": "tsc --project tsconfig.build.json",
     "clean": "rm -rf cjs src/coverage",
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix",
-    "lint:tsc": "tsc --noEmit",
+    "lint:tsc": "tsc --project tsconfig.test.json",
     "prepare": "husky",
     "prepublishOnly": "npm run lint && npm run lint:tsc && npm test && npm run clean && npm run build",
-    "test": "jest --colors",
+    "test": "npm run build && jest --colors",
     "test:ci": "CI=true npm test -- --coverage --ci",
-    "test:integration": "npm run build && node --test **/*.test.mjs && npm test -- --config=jest.config.integration.ts",
     "test:watch": "npm test -- --watch"
   },
   "repository": {
@@ -48,17 +53,18 @@
     "@eslint/js": "10.0.1",
     "@types/jest": "30.0.0",
     "@types/node": "25.5.0",
-    "@typescript-eslint/eslint-plugin": "8.57.2",
-    "@typescript-eslint/parser": "8.57.2",
     "eslint": "10.1.0",
     "eslint-plugin-prettier": "5.5.5",
+    "eslint-plugin-simple-import-sort": "12.1.1",
+    "eslint-plugin-tsdoc": "0.5.2",
     "husky": "9.1.7",
     "jest": "30.3.0",
     "lint-staged": "16.4.0",
     "prettier": "3.8.1",
     "ts-jest": "29.4.6",
     "ts-node": "10.9.2",
-    "typescript": "5.9.3"
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.57.2"
   },
   "files": [
     "cjs/"

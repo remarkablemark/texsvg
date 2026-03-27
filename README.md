@@ -151,12 +151,6 @@ Run tests in watch mode:
 npm run test:watch
 ```
 
-Run integration tests:
-
-```sh
-npm run test:integration
-```
-
 Lint files:
 
 ```sh
