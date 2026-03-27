@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.2](https://github.com/remarkablemark/texsvg/compare/v3.0.1...v3.0.2) (2026-03-27)
+
+
+### Miscellaneous Chores
+
+* release 3.0.2 ([06912a7](https://github.com/remarkablemark/texsvg/commit/06912a73a60695ff2941d2869d3c1d3b62ee51a5))
+
 ## [3.0.1](https://github.com/remarkablemark/texsvg/compare/v3.0.0...v3.0.1) (2026-03-26)
 
 
