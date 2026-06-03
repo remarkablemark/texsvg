@@ -59,7 +59,7 @@
     "eslint-plugin-tsdoc": "0.5.2",
     "husky": "9.1.7",
     "jest": "30.4.2",
-    "lint-staged": "17.0.5",
+    "lint-staged": "17.0.7",
     "prettier": "3.8.3",
     "ts-jest": "29.4.11",
     "ts-node": "10.9.2",
