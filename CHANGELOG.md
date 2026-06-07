@@ -2,6 +2,35 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.0.0](https://github.com/remarkablemark/texsvg/compare/v3.0.3...v4.0.0) (2026-06-07)
+
+
+### ⚠ BREAKING CHANGES
+
+* Target changed from es5 to ES2020
+* texsvg is now a named export instead of a default export
+* MathJax has been upgraded from 3.2.2 to 4.1.2
+
+### Features
+
+* upgrade mathjax from 3.2.2 to 4.1.2 ([c9bed8c](https://github.com/remarkablemark/texsvg/commit/c9bed8c0c45b4027e329bc1bb18d4380daa49863))
+
+
+### Bug Fixes
+
+* remove `<mjx-container>` wrapper from SVG output ([a286ee2](https://github.com/remarkablemark/texsvg/commit/a286ee22d6619ef5a5957ef17a47018bf513ef02))
+
+
+### Code Refactoring
+
+* replace default export with named export ([e15c299](https://github.com/remarkablemark/texsvg/commit/e15c29902e3f9bd34cd6b135d77244929d2176ed))
+
+
+### Build System
+
+* bump typescript from 5.9.3 to 6.0.3 ([5caaff3](https://github.com/remarkablemark/texsvg/commit/5caaff388c1bdcc924c7502a862bd150da601d57))
+* **deps:** bump yargs from 17 to 18.0.0 ([1793c64](https://github.com/remarkablemark/texsvg/commit/1793c64529452b7826d477828532aa2c758e765e))
+
 ## [3.0.3](https://github.com/remarkablemark/texsvg/compare/v3.0.2...v3.0.3) (2026-03-27)
 
 
