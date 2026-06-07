@@ -1,10 +1,10 @@
-import { exec } from 'child_process';
+import { execFile } from 'child_process';
 import { promises } from 'fs';
 import { resolve } from 'path';
 import { promisify } from 'util';
 
 const { readFile, unlink } = promises;
-const execPromise = promisify(exec);
+const execFilePromise = promisify(execFile);
 
 // MathJax 4.x initialization takes longer
 jest.setTimeout(60000);
@@ -22,7 +22,7 @@ describe('texsvg', () => {
         process.exit(1);
       });
     `;
-    const { stdout } = await execPromise(`node -e "${script}"`, {
+    const { stdout } = await execFilePromise('node', ['-e', script], {
       cwd: resolve(__dirname, '..'),
     });
     expect(stdout).toContain('<svg');
@@ -35,7 +35,7 @@ describe('bin', () => {
 
   it('logs SVG to console when 1 argument is passed', async () => {
     const tex = 'x=\\\\frac{-b\\\\pm\\\\sqrt{b^2-4ac}}{2a}';
-    const { stdout } = await execPromise(`node ${bin} "${tex}"`);
+    const { stdout } = await execFilePromise('node', [bin, tex]);
     expect(stdout).toContain('<svg');
     expect(stdout).toContain('</svg>');
   });
@@ -43,7 +43,7 @@ describe('bin', () => {
   it('saves SVG to file when 2 arguments are passed', async () => {
     const tex = 'x';
     const file = resolve(__dirname, 'test.svg');
-    await execPromise(`node ${bin} "${tex}" ${file}`);
+    await execFilePromise('node', [bin, tex, file]);
     const svg = await readFile(file, 'utf8');
     await unlink(file);
     expect(svg).toContain('<svg');
