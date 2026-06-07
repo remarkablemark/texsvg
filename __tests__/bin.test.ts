@@ -1,9 +1,7 @@
-import { writeFile } from 'fs';
+import { writeFile } from 'node:fs/promises';
 
-jest.mock('fs', () => ({
-  writeFile: jest.fn((file: string, data: string, callback: () => void) => {
-    callback();
-  }),
+jest.mock('node:fs/promises', () => ({
+  writeFile: jest.fn(() => Promise.resolve()),
 }));
 
 const mockIndex = {
@@ -83,7 +81,7 @@ describe('bin', () => {
       expect(processExitSpy).not.toHaveBeenCalled();
       expect(texsvg).toHaveBeenCalledWith(tex, { optimize: true });
       expect(consoleLogSpy).not.toHaveBeenCalled();
-      expect(writeFile).toHaveBeenCalledWith(file, tex, expect.any(Function));
+      expect(writeFile).toHaveBeenCalledWith(file, tex);
     });
   });
 
