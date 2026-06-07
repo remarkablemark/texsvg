@@ -6,7 +6,9 @@
     "moduleResolution": "nodenext",
     "noEmit": true,
     "allowJs": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "rootDir": ".",
+    "types": ["jest", "node", "yargs"]
   },
-  "include": ["__tests__", "cjs", "src", "*.mjs", "*.mts", "*.ts"]
+  "include": ["__tests__", "src", "eslint.config.mts", "jest.config.ts"]
 }

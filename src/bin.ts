@@ -2,9 +2,9 @@
 
 /* eslint-disable no-console */
 
-import { writeFile } from 'fs';
+import { writeFile } from 'node:fs/promises';
+import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
-import yargs from 'yargs/yargs';
 import { texsvg } from '.';
 
 const { _, optimize } = yargs(hideBin(process.argv))
@@ -33,25 +33,21 @@ const { _, optimize } = yargs(hideBin(process.argv))
 
 const [tex, file] = _ as [string, string | undefined];
 
-export const result = texsvg(tex, { optimize })
-  .then((svg) => {
+async function main(): Promise<void> {
+  try {
+    const svg = await texsvg(tex, { optimize });
+
     // output svg to stdout if it's not going to be saved to a file
     if (!file) {
       console.log(svg);
       return;
     }
 
-    return new Promise((resolve, reject) => {
-      writeFile(file, svg, (error) => {
-        /* istanbul ignore next */
-        if (error) {
-          reject(error);
-        } else {
-          resolve(undefined);
-        }
-      });
-    });
-  })
-  .catch((error: unknown) => {
+    await writeFile(file, svg);
+  } catch (error) {
+    /* istanbul ignore next */
     console.error(error);
-  });
+  }
+}
+
+export const result = main();

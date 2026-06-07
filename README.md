@@ -193,6 +193,8 @@ CJS users must update:
 +const { texsvg } = require('texsvg');
 ```
 
+Change TypeScript build target from es5 to ES2020.
+
 ### v3
 
 Bump `svgo` from `3.3.2` to `4.0.0`.
