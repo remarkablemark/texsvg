@@ -28,6 +28,10 @@ const { texsvg } = require('texsvg');
 texsvg('\\frac{a}{b}').then((svg) => console.log(svg));
 ```
 
+Examples:
+
+[Script](https://stackblitz.com/edit/texsvg) | [Server](https://stackblitz.com/edit/texsvg-server) | [texsvg-server](https://github.com/remarkablemark/texsvg-server) | [JSFiddle](https://jsfiddle.net/remarkablemark/1k7t6s9o/)
+
 ## Installation
 
 ### Module
@@ -163,13 +167,6 @@ Fix lint errors:
 ```sh
 npm run lint:fix
 ```
-
-## Examples
-
-- [StackBlitz (Script)](https://stackblitz.com/edit/texsvg)
-- [StackBlitz (Server)](https://stackblitz.com/edit/texsvg-server)
-- [texsvg-server](https://github.com/remarkablemark/texsvg-server)
-- [JSFiddle](https://jsfiddle.net/remarkablemark/1k7t6s9o/)
 
 ## Migration
 
