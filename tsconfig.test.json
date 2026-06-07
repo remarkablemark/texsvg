@@ -8,7 +8,7 @@
     "allowJs": true,
     "isolatedModules": true,
     "rootDir": ".",
-    "types": ["jest", "node", "yargs"]
+    "types": ["vitest/globals", "node"]
   },
-  "include": ["__tests__", "src", "eslint.config.mts", "jest.config.ts"]
+  "include": ["__tests__", "src", "eslint.config.mts", "vitest.config.mts"]
 }
