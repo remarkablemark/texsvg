@@ -195,6 +195,8 @@ CJS users must update:
 
 Change TypeScript build target from es5 to ES2020.
 
+Bump `yargs` from `17` to `18.0.0`.
+
 ### v3
 
 Bump `svgo` from `3.3.2` to `4.0.0`.
