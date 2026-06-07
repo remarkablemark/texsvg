@@ -1,8 +1,8 @@
-import { optimize } from 'svgo';
 import mathjax from 'mathjax';
+import { optimize } from 'svgo';
 import { mathjaxInitOptions, svgoOptimizeOptions } from './config';
 
-let tex2svg: ((tex: string) => string) | undefined;
+let tex2svg: ((tex: string) => Promise<string>) | undefined;
 
 /**
  * Converts TeX expression to SVG markup.
@@ -11,7 +11,7 @@ let tex2svg: ((tex: string) => string) | undefined;
  * @param options - The options.
  * @returns - The promise containing the SVG when fulfilled.
  */
-async function texsvg(
+export async function texsvg(
   tex: string,
   options = { optimize: true },
 ): Promise<string> {
@@ -20,22 +20,21 @@ async function texsvg(
   }
 
   if (!tex2svg) {
-    const MathJax = await mathjax.init(mathjaxInitOptions);
+    await mathjax.init(mathjaxInitOptions);
+    await mathjax.startup.promise;
 
     // memoize
-    tex2svg = (tex: string) =>
-      MathJax.startup.adaptor.innerHTML(MathJax.tex2svg(tex));
+    tex2svg = async (tex: string) => {
+      const node = await mathjax.tex2svgPromise(tex);
+      return mathjax.startup.adaptor.serializeXML(node);
+    };
   }
 
-  const svg = tex2svg(tex);
+  const svg = await tex2svg(tex);
 
   if (options.optimize) {
     return optimize(svg, svgoOptimizeOptions).data;
-  } else {
-    return svg;
   }
-}
 
-// support both ES Modules and CommonJS
-texsvg.default = texsvg;
-export = texsvg;
+  return svg;
+}

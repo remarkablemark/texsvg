@@ -6,8 +6,12 @@ jest.mock('fs', () => ({
   }),
 }));
 
-const texsvg = jest.fn((value) => Promise.resolve(value));
-jest.mock('../src/index', () => texsvg);
+const mockIndex = {
+  texsvg: jest.fn((value: unknown) => Promise.resolve(value)),
+};
+jest.mock('../src/index', () => mockIndex);
+
+const { texsvg } = mockIndex;
 
 let consoleErrorSpy: jest.SpyInstance;
 let consoleLogSpy: jest.SpyInstance;
@@ -39,8 +43,8 @@ describe('bin', () => {
   it('exits with error when no arguments are passed', async () => {
     await jest.isolateModulesAsync(async () => {
       process.argv = processArgv;
-      // eslint-disable-next-line @typescript-eslint/no-require-imports
-      await require('../src/bin');
+      // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-unsafe-member-access
+      await require('../src/bin').result;
       expect(processExitSpy).toHaveBeenCalledWith(1);
       expect(consoleErrorSpy).toHaveBeenCalledWith(
         expect.stringContaining('<tex> [file] [options]'),
@@ -52,8 +56,8 @@ describe('bin', () => {
   it('logs SVG to console when 1 argument is passed', async () => {
     await jest.isolateModulesAsync(async () => {
       process.argv = [...processArgv, tex];
-      // eslint-disable-next-line @typescript-eslint/no-require-imports
-      await require('../src/bin');
+      // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-unsafe-member-access
+      await require('../src/bin').result;
       expect(processExitSpy).not.toHaveBeenCalled();
       expect(texsvg).toHaveBeenCalledWith(tex, { optimize: true });
       expect(consoleLogSpy).toHaveBeenCalledWith(tex);
@@ -63,8 +67,8 @@ describe('bin', () => {
   it('disables SVG optimization with option --optimize=false', async () => {
     await jest.isolateModulesAsync(async () => {
       process.argv = [...processArgv, tex, '--optimize=false'];
-      // eslint-disable-next-line @typescript-eslint/no-require-imports
-      await require('../src/bin');
+      // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-unsafe-member-access
+      await require('../src/bin').result;
       expect(processExitSpy).not.toHaveBeenCalled();
       expect(texsvg).toHaveBeenCalledWith(tex, { optimize: false });
       expect(consoleLogSpy).toHaveBeenCalledWith(tex);
@@ -74,8 +78,8 @@ describe('bin', () => {
   it('saves SVG to file when 2 arguments are passed', async () => {
     await jest.isolateModulesAsync(async () => {
       process.argv = [...processArgv, tex, file, file];
-      // eslint-disable-next-line @typescript-eslint/no-require-imports
-      await require('../src/bin');
+      // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-unsafe-member-access
+      await require('../src/bin').result;
       expect(processExitSpy).not.toHaveBeenCalled();
       expect(texsvg).toHaveBeenCalledWith(tex, { optimize: true });
       expect(consoleLogSpy).not.toHaveBeenCalled();
@@ -88,8 +92,8 @@ describe('bin', () => {
       const error = 'Error';
       texsvg.mockRejectedValueOnce(error);
       process.argv = [...processArgv, tex];
-      // eslint-disable-next-line @typescript-eslint/no-require-imports
-      await require('../src/bin');
+      // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-unsafe-member-access
+      await require('../src/bin').result;
       expect(processExitSpy).not.toHaveBeenCalled();
       expect(texsvg).toHaveBeenCalledWith(tex, { optimize: true });
       expect(consoleLogSpy).not.toHaveBeenCalled();

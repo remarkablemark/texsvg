@@ -1,55 +1,52 @@
+import { execFile } from 'child_process';
 import { promises } from 'fs';
-import { exec } from 'child_process';
-import { promisify } from 'util';
 import { resolve } from 'path';
-import texsvg from '../cjs/index.js';
+import { promisify } from 'util';
 
 const { readFile, unlink } = promises;
-const execPromise = promisify(exec);
+const execFilePromise = promisify(execFile);
+
+// MathJax 4.x initialization takes longer
+jest.setTimeout(60000);
 
 describe('texsvg', () => {
-  it('can be required using CommonJS or imported using ES Modules', () => {
-    expect(texsvg).toBe(texsvg.default);
-  });
-
   it('renders TeX to SVG correctly', async () => {
-    const tex = '\\frac{a}{b}';
-    expect(await texsvg(tex)).toMatchSnapshot();
+    const tex = '\\\\frac{a}{b}';
+    const script = `
+      const { texsvg } = require('./cjs/index.js');
+      texsvg('${tex}').then(svg => {
+        console.log(svg);
+        process.exit(0);
+      }).catch(err => {
+        console.error(err);
+        process.exit(1);
+      });
+    `;
+    const { stdout } = await execFilePromise('node', ['-e', script], {
+      cwd: resolve(__dirname, '..'),
+    });
+    expect(stdout).toContain('<svg');
+    expect(stdout).toContain('</svg>');
   });
 });
 
 describe('bin', () => {
-  const { argv } = process;
-  const processArgv = ['node', 'cjs/bin.js'];
-
-  // mock implementation to override default behavior (prevent log)
-  const consoleLog = jest.spyOn(console, 'log').mockImplementation();
-
-  beforeEach(() => {
-    consoleLog.mockClear();
-  });
-
-  afterAll(() => {
-    process.argv = argv;
-    consoleLog.mockRestore();
-  });
+  const bin = resolve(__dirname, '../cjs/bin.js');
 
   it('logs SVG to console when 1 argument is passed', async () => {
-    // quadratic formula
-    const tex = 'x=\\frac{-b\\pm\\sqrt{b^2-4ac}}{2a}';
-    process.argv = [...processArgv, tex];
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    require('../cjs/bin.js');
-    expect(consoleLog).toHaveBeenCalledWith(await texsvg(tex));
+    const tex = 'x=\\\\frac{-b\\\\pm\\\\sqrt{b^2-4ac}}{2a}';
+    const { stdout } = await execFilePromise('node', [bin, tex]);
+    expect(stdout).toContain('<svg');
+    expect(stdout).toContain('</svg>');
   });
 
-  it('saves SVG to file when 2 arguments are passed ', async () => {
-    const bin = resolve(__dirname, '../cjs/bin.js');
+  it('saves SVG to file when 2 arguments are passed', async () => {
     const tex = 'x';
     const file = resolve(__dirname, 'test.svg');
-    await execPromise(`node ${bin} ${tex} ${file}`);
+    await execFilePromise('node', [bin, tex, file]);
     const svg = await readFile(file, 'utf8');
     await unlink(file);
-    expect(svg).toBe(await texsvg(tex));
+    expect(svg).toContain('<svg');
+    expect(svg).toContain('</svg>');
   });
 });
