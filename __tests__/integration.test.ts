@@ -27,6 +27,7 @@ describe('texsvg', () => {
     });
     expect(stdout).toContain('<svg');
     expect(stdout).toContain('</svg>');
+    expect(stdout).not.toContain('<mjx-container');
   });
 });
 
@@ -38,6 +39,7 @@ describe('bin', () => {
     const { stdout } = await execFilePromise('node', [bin, tex]);
     expect(stdout).toContain('<svg');
     expect(stdout).toContain('</svg>');
+    expect(stdout).not.toContain('<mjx-container');
   });
 
   it('saves SVG to file when 2 arguments are passed', async () => {
@@ -48,5 +50,6 @@ describe('bin', () => {
     await unlink(file);
     expect(svg).toContain('<svg');
     expect(svg).toContain('</svg>');
+    expect(svg).not.toContain('<mjx-container');
   });
 });

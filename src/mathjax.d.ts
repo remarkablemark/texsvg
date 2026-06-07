@@ -1,5 +1,6 @@
 declare module 'mathjax' {
   interface MathJaxAdaptor {
+    firstChild: (element: unknown) => unknown;
     innerHTML: (element: unknown) => string;
     serializeXML: (element: unknown) => string;
   }
