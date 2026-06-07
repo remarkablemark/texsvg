@@ -1,11 +1,10 @@
 import { fileURLToPath } from 'node:url';
 
-import { includeIgnoreFile } from '@eslint/config-helpers';
 import eslint from '@eslint/js';
-import { defineConfig } from 'eslint/config';
 import prettier from 'eslint-plugin-prettier';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
 import tsdoc from 'eslint-plugin-tsdoc';
+import { defineConfig, includeIgnoreFile } from 'eslint/config';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
@@ -36,7 +35,6 @@ export default defineConfig([
       globals: {
         ...globals.browser,
         ...globals.node,
-        ...globals.jest,
       },
       parserOptions: {
         project: ['tsconfig.build.json', 'tsconfig.test.json'],

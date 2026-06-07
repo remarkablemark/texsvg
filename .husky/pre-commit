@@ -1,3 +1,4 @@
+npm run build
 npm run lint:tsc
 npm run test:ci
 npx lint-staged

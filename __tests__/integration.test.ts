@@ -7,7 +7,7 @@ const { readFile, unlink } = promises;
 const execFilePromise = promisify(execFile);
 
 // MathJax 4.x initialization takes longer
-jest.setTimeout(60000);
+vi.setConfig({ testTimeout: 60000 });
 
 describe('texsvg', () => {
   it('renders TeX to SVG correctly', async () => {

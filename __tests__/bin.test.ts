@@ -1,32 +1,38 @@
 import { writeFile } from 'node:fs/promises';
+import type { Mock } from 'vitest';
 
-jest.mock('node:fs/promises', () => ({
-  writeFile: jest.fn(() => Promise.resolve()),
+vi.mock('node:fs/promises', () => ({
+  writeFile: vi.fn(() => Promise.resolve()),
 }));
 
 const mockIndex = {
-  texsvg: jest.fn((value: unknown) => Promise.resolve(value)),
+  texsvg: vi.fn((value: unknown) => Promise.resolve(value)),
 };
-jest.mock('../src/index', () => mockIndex);
+vi.mock('../src/index', () => mockIndex);
 
 const { texsvg } = mockIndex;
 
-let consoleErrorSpy: jest.SpyInstance;
-let consoleLogSpy: jest.SpyInstance;
-let processExitSpy: jest.SpyInstance;
+let consoleErrorSpy: Mock;
+let consoleLogSpy: Mock;
+let processExitSpy: Mock;
+
+// eslint-disable-next-line @typescript-eslint/no-empty-function
+const noop = () => {};
 
 beforeAll(() => {
   // mock implementation to override default behavior (prevent exit or log)
-  consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation();
-  consoleLogSpy = jest.spyOn(console, 'log').mockImplementation();
-  processExitSpy = jest.spyOn(process, 'exit').mockImplementation();
+  consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(noop);
+  consoleLogSpy = vi.spyOn(console, 'log').mockImplementation(noop);
+  processExitSpy = vi
+    .spyOn(process, 'exit')
+    .mockImplementation(() => undefined as never);
 });
 
 const { argv } = process;
 
 afterAll(() => {
   process.argv = argv;
-  jest.restoreAllMocks();
+  vi.restoreAllMocks();
 });
 
 describe('bin', () => {
@@ -35,68 +41,59 @@ describe('bin', () => {
   const file = 'file.svg';
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
+    vi.resetModules();
   });
 
   it('exits with error when no arguments are passed', async () => {
-    await jest.isolateModulesAsync(async () => {
-      process.argv = processArgv;
-      // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-unsafe-member-access
-      await require('../src/bin').result;
-      expect(processExitSpy).toHaveBeenCalledWith(1);
-      expect(consoleErrorSpy).toHaveBeenCalledWith(
-        expect.stringContaining('<tex> [file] [options]'),
-      );
-      expect(consoleErrorSpy).toHaveBeenCalledWith('TeX string is required');
-    });
+    process.argv = processArgv;
+    const { result } = await import('../src/bin.js');
+    await result;
+    expect(processExitSpy).toHaveBeenCalledWith(1);
+    expect(consoleErrorSpy).toHaveBeenCalledWith(
+      expect.stringContaining('<tex> [file] [options]'),
+    );
+    expect(consoleErrorSpy).toHaveBeenCalledWith('TeX string is required');
   });
 
   it('logs SVG to console when 1 argument is passed', async () => {
-    await jest.isolateModulesAsync(async () => {
-      process.argv = [...processArgv, tex];
-      // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-unsafe-member-access
-      await require('../src/bin').result;
-      expect(processExitSpy).not.toHaveBeenCalled();
-      expect(texsvg).toHaveBeenCalledWith(tex, { optimize: true });
-      expect(consoleLogSpy).toHaveBeenCalledWith(tex);
-    });
+    process.argv = [...processArgv, tex];
+    const { result } = await import('../src/bin.js');
+    await result;
+    expect(processExitSpy).not.toHaveBeenCalled();
+    expect(texsvg).toHaveBeenCalledWith(tex, { optimize: true });
+    expect(consoleLogSpy).toHaveBeenCalledWith(tex);
   });
 
   it('disables SVG optimization with option --optimize=false', async () => {
-    await jest.isolateModulesAsync(async () => {
-      process.argv = [...processArgv, tex, '--optimize=false'];
-      // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-unsafe-member-access
-      await require('../src/bin').result;
-      expect(processExitSpy).not.toHaveBeenCalled();
-      expect(texsvg).toHaveBeenCalledWith(tex, { optimize: false });
-      expect(consoleLogSpy).toHaveBeenCalledWith(tex);
-    });
+    process.argv = [...processArgv, tex, '--optimize=false'];
+    const { result } = await import('../src/bin.js');
+    await result;
+    expect(processExitSpy).not.toHaveBeenCalled();
+    expect(texsvg).toHaveBeenCalledWith(tex, { optimize: false });
+    expect(consoleLogSpy).toHaveBeenCalledWith(tex);
   });
 
   it('saves SVG to file when 2 arguments are passed', async () => {
-    await jest.isolateModulesAsync(async () => {
-      process.argv = [...processArgv, tex, file, file];
-      // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-unsafe-member-access
-      await require('../src/bin').result;
-      expect(processExitSpy).not.toHaveBeenCalled();
-      expect(texsvg).toHaveBeenCalledWith(tex, { optimize: true });
-      expect(consoleLogSpy).not.toHaveBeenCalled();
-      expect(writeFile).toHaveBeenCalledWith(file, tex);
-    });
+    process.argv = [...processArgv, tex, file, file];
+    const { result } = await import('../src/bin.js');
+    await result;
+    expect(processExitSpy).not.toHaveBeenCalled();
+    expect(texsvg).toHaveBeenCalledWith(tex, { optimize: true });
+    expect(consoleLogSpy).not.toHaveBeenCalled();
+    expect(writeFile).toHaveBeenCalledWith(file, tex);
   });
 
   it('logs error to console if there is an exception', async () => {
-    await jest.isolateModulesAsync(async () => {
-      const error = 'Error';
-      texsvg.mockRejectedValueOnce(error);
-      process.argv = [...processArgv, tex];
-      // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-unsafe-member-access
-      await require('../src/bin').result;
-      expect(processExitSpy).not.toHaveBeenCalled();
-      expect(texsvg).toHaveBeenCalledWith(tex, { optimize: true });
-      expect(consoleLogSpy).not.toHaveBeenCalled();
-      expect(writeFile).not.toHaveBeenCalled();
-      expect(consoleErrorSpy).toHaveBeenCalledWith(error);
-    });
+    const error = 'Error';
+    texsvg.mockRejectedValueOnce(error);
+    process.argv = [...processArgv, tex];
+    const { result } = await import('../src/bin.js');
+    await result;
+    expect(processExitSpy).not.toHaveBeenCalled();
+    expect(texsvg).toHaveBeenCalledWith(tex, { optimize: true });
+    expect(consoleLogSpy).not.toHaveBeenCalled();
+    expect(writeFile).not.toHaveBeenCalled();
+    expect(consoleErrorSpy).toHaveBeenCalledWith(error);
   });
 });
