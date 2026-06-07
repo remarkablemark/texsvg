@@ -11,6 +11,7 @@ jest.mock('mathjax', () => {
   const tex2svgPromiseMock = jest.fn((input) =>
     Promise.resolve(`tex2svgPromise(${String(input)})`),
   );
+  const firstChildMock = jest.fn((input) => `firstChild(${String(input)})`);
   const serializeXMLMock = jest.fn((input) => `serializeXML(${String(input)})`);
   const startupPromiseMock = Promise.resolve();
   const mockModule: Record<string, unknown> = {
@@ -18,6 +19,7 @@ jest.mock('mathjax', () => {
       // Simulate MathJax 4.x modifying the module after init
       mockModule.startup = {
         adaptor: {
+          firstChild: firstChildMock,
           serializeXML: serializeXMLMock,
         },
         promise: startupPromiseMock,
@@ -27,6 +29,7 @@ jest.mock('mathjax', () => {
     }),
     __mocks: {
       tex2svgPromise: tex2svgPromiseMock,
+      firstChild: firstChildMock,
       serializeXML: serializeXMLMock,
       startupPromise: startupPromiseMock,
     },
@@ -42,6 +45,7 @@ const mathjaxMocks = (
   mathjax as unknown as {
     __mocks: {
       tex2svgPromise: jest.Mock;
+      firstChild: jest.Mock;
       serializeXML: jest.Mock;
       init: jest.Mock;
       startupPromise: Promise<void>;
@@ -85,14 +89,17 @@ describe('texsvg', () => {
 
   it('uses mathjax to convert TeX to SVG', async () => {
     expect(await texsvg(tex1)).toBe(
-      `optimize(serializeXML(tex2svgPromise(${tex1})))`,
+      `optimize(serializeXML(firstChild(tex2svgPromise(${tex1}))))`,
     );
     expect(mathjax.init).toHaveBeenCalledWith(mathjaxConfig);
 
     const MathJax = await mathjax.init(mathjaxConfig);
     expect(MathJax.tex2svgPromise).toHaveBeenCalledWith(tex1);
-    expect(MathJax.startup.adaptor.serializeXML).toHaveBeenCalledWith(
+    expect(MathJax.startup.adaptor.firstChild).toHaveBeenCalledWith(
       `tex2svgPromise(${tex1})`,
+    );
+    expect(MathJax.startup.adaptor.serializeXML).toHaveBeenCalledWith(
+      `firstChild(tex2svgPromise(${tex1}))`,
     );
   });
 
@@ -103,23 +110,27 @@ describe('texsvg', () => {
     // clear call counts to test memoization
     mockedMathjax.init.mockClear();
     mathjaxMocks.tex2svgPromise.mockClear();
+    mathjaxMocks.firstChild.mockClear();
     mathjaxMocks.serializeXML.mockClear();
 
     // expect memoized function to be called (no new init call)
     const result2 = await texsvg(tex2);
-    expect(result2).toBe(`optimize(serializeXML(tex2svgPromise(${tex2})))`);
+    expect(result2).toBe(
+      `optimize(serializeXML(firstChild(tex2svgPromise(${tex2}))))`,
+    );
     expect(mockedMathjax.init).not.toHaveBeenCalled();
     expect(mathjaxMocks.tex2svgPromise).toHaveBeenCalledTimes(1);
+    expect(mathjaxMocks.firstChild).toHaveBeenCalledTimes(1);
     expect(mathjaxMocks.serializeXML).toHaveBeenCalledTimes(1);
   });
 
   it('optimizes SVG with svgo', async () => {
     expect(await texsvg(tex2)).toBe(
-      `optimize(serializeXML(tex2svgPromise(${tex2})))`,
+      `optimize(serializeXML(firstChild(tex2svgPromise(${tex2}))))`,
     );
     expect(optimize).toHaveBeenCalledTimes(1);
     expect(optimize).toHaveBeenCalledWith(
-      `serializeXML(tex2svgPromise(${tex2}))`,
+      `serializeXML(firstChild(tex2svgPromise(${tex2})))`,
       svgoOptimizeOptions,
     );
   });
@@ -128,7 +139,7 @@ describe('texsvg', () => {
 describe('optimize', () => {
   it('does not optimize SVG with svgo', async () => {
     expect(await texsvg(tex2, { optimize: false })).toBe(
-      `serializeXML(tex2svgPromise(${tex2}))`,
+      `serializeXML(firstChild(tex2svgPromise(${tex2})))`,
     );
     expect(optimize).not.toHaveBeenCalled();
   });

@@ -26,7 +26,11 @@ export async function texsvg(
     // memoize
     tex2svg = async (tex: string) => {
       const node = await mathjax.tex2svgPromise(tex);
-      return mathjax.startup.adaptor.serializeXML(node);
+      const adaptor = mathjax.startup.adaptor;
+
+      // Extract the SVG element from the mjx-container wrapper
+      const svgNode = adaptor.firstChild(node);
+      return adaptor.serializeXML(svgNode);
     };
   }
 
