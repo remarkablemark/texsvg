@@ -13,7 +13,7 @@ describe('texsvg', () => {
   it('renders TeX to SVG correctly', async () => {
     const tex = '\\\\frac{a}{b}';
     const script = `
-      const texsvg = require('./cjs/index.js');
+      const { texsvg } = require('./cjs/index.js');
       texsvg('${tex}').then(svg => {
         console.log(svg);
         process.exit(0);

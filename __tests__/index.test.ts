@@ -1,6 +1,6 @@
 import mathjax from 'mathjax';
 import { optimize } from 'svgo';
-import texsvg from '../src';
+import { texsvg } from '../src';
 import { svgoOptimizeOptions } from '../src/config';
 
 jest.mock('svgo', () => ({
@@ -82,10 +82,6 @@ describe('texsvg', () => {
       load: ['input/tex', 'output/svg'],
     },
   };
-
-  it('has a default export', () => {
-    expect(texsvg).toBe(texsvg.default);
-  });
 
   it('uses mathjax to convert TeX to SVG', async () => {
     expect(await texsvg(tex1)).toBe(

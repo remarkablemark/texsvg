@@ -11,7 +11,7 @@ let tex2svg: ((tex: string) => Promise<string>) | undefined;
  * @param options - The options.
  * @returns - The promise containing the SVG when fulfilled.
  */
-async function texsvg(
+export async function texsvg(
   tex: string,
   options = { optimize: true },
 ): Promise<string> {
@@ -34,11 +34,7 @@ async function texsvg(
 
   if (options.optimize) {
     return optimize(svg, svgoOptimizeOptions).data;
-  } else {
-    return svg;
   }
-}
 
-// support both ES Modules and CommonJS
-texsvg.default = texsvg;
-export = texsvg;
+  return svg;
+}

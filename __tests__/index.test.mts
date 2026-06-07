@@ -3,7 +3,7 @@ import { describe, it } from 'node:test';
 
 import assert from 'assert';
 
-import texsvg from '../cjs/index.js';
+import { texsvg } from '../cjs/index.js';
 
 describe('texsvg', () => {
   it('exports function', () => {

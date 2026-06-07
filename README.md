@@ -23,7 +23,7 @@ npx texsvg '\frac{a}{b}' fraction.svg
 Script:
 
 ```js
-const texsvg = require('texsvg');
+const { texsvg } = require('texsvg');
 
 texsvg('\\frac{a}{b}').then((svg) => console.log(svg));
 ```
@@ -71,13 +71,13 @@ npx texsvg
 Import with ES Modules:
 
 ```js
-import texsvg from 'texsvg';
+import { texsvg } from 'texsvg';
 ```
 
 Or require with CommonJS:
 
 ```js
-const texsvg = require('texsvg');
+const { texsvg } = require('texsvg');
 ```
 
 Convert TeX to SVG using [async-await](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/async_function):
@@ -171,9 +171,35 @@ npm run lint:fix
 - [texsvg-server](https://github.com/remarkablemark/texsvg-server)
 - [JSFiddle](https://jsfiddle.net/remarkablemark/1k7t6s9o/)
 
-## Release
+## Migration
 
-Release is automated with [Release Please](https://github.com/googleapis/release-please).
+### v4
+
+Bump `mathjax` from `3.2.2` to `4.1.2`.
+
+`texsvg` is now a named export instead of a default export.
+
+ESM users must update:
+
+```diff
+-import texsvg from 'texsvg';
++import { texsvg } from 'texsvg';
+```
+
+CJS users must update:
+
+```diff
+-const texsvg = require('texsvg');
++const { texsvg } = require('texsvg');
+```
+
+### v3
+
+Bump `svgo` from `3.3.2` to `4.0.0`.
+
+### v2
+
+Require Node.js 14+ as the minimum version.
 
 ## License
 

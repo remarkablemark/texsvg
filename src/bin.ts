@@ -3,9 +3,9 @@
 /* eslint-disable no-console */
 
 import { writeFile } from 'fs';
-import yargs from 'yargs/yargs';
 import { hideBin } from 'yargs/helpers';
-import texsvg from '.';
+import yargs from 'yargs/yargs';
+import { texsvg } from '.';
 
 const { _, optimize } = yargs(hideBin(process.argv))
   .usage('Usage: $0 <tex> [file] [options]')
@@ -33,7 +33,7 @@ const { _, optimize } = yargs(hideBin(process.argv))
 
 const [tex, file] = _ as [string, string | undefined];
 
-export = texsvg(tex, { optimize })
+export const result = texsvg(tex, { optimize })
   .then((svg) => {
     // output svg to stdout if it's not going to be saved to a file
     if (!file) {
