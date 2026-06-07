@@ -43,7 +43,7 @@
   "dependencies": {
     "mathjax": "4.1.2",
     "svgo": "4.0.1",
-    "yargs": "17"
+    "yargs": "18.0.0"
   },
   "devDependencies": {
     "@commitlint/cli": "21.0.2",
