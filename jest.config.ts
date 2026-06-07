@@ -13,6 +13,7 @@ const config: Config = {
   },
   moduleFileExtensions: ['js', 'ts'],
   preset: 'ts-jest',
+  testEnvironment: 'node',
   reporters:
     process.env.CI === 'true'
       ? [['github-actions', { silent: false }], 'summary']
