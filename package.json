@@ -42,7 +42,7 @@
   ],
   "dependencies": {
     "mathjax": "4.1.3",
-    "svgo": "4.0.1",
+    "svgo": "4.0.2",
     "yargs": "18.0.0"
   },
   "devDependencies": {
