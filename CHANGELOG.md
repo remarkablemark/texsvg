@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.0.1](https://github.com/remarkablemark/texsvg/compare/v4.0.0...v4.0.1) (2026-07-14)
+
+
+### Build System
+
+* **deps:** bump mathjax from 4.1.2 to 4.1.3 ([#1144](https://github.com/remarkablemark/texsvg/issues/1144)) ([5130fee](https://github.com/remarkablemark/texsvg/commit/5130fee8c7dc6264e81e43fb2060fc7871fc8627))
+* **deps:** bump svgo from 4.0.1 to 4.0.2 ([#1153](https://github.com/remarkablemark/texsvg/issues/1153)) ([7b136fa](https://github.com/remarkablemark/texsvg/commit/7b136faae3a1fcb0b3a1b04680eefd3158179e76))
+
 ## [4.0.0](https://github.com/remarkablemark/texsvg/compare/v3.0.3...v4.0.0) (2026-06-07)
 
 
