@@ -58,7 +58,7 @@
     "eslint-plugin-simple-import-sort": "14.0.0",
     "eslint-plugin-tsdoc": "0.5.2",
     "husky": "9.1.7",
-    "lint-staged": "17.1.1",
+    "lint-staged": "17.2.0",
     "prettier": "3.9.6",
     "typescript": "6.0.3",
     "typescript-eslint": "8.65.0",
