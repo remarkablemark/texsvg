@@ -1,6 +1,6 @@
 {
   "name": "texsvg",
-  "version": "4.0.2",
+  "version": "4.0.3",
   "description": "Converts TeX to SVG.",
   "author": "Mark <mark@remarkablemark.org>",
   "funding": [
