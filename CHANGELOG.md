@@ -1,160 +1,143 @@
 # Changelog
 
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+## [4.0.3](https://github.com/remarkablemark/texsvg/compare/v4.0.2...v4.0.3) (2026-10-14)
+
+### Build System
+
+- **deps:** bump yargs from 18.1.0 to 18.2.0 ([#1196](https://github.com/remarkablemark/texsvg/issues/1196)) ([4e73b42](https://github.com/remarkablemark/texsvg/commit/4e73b420449d85b50983fc0c9a08a69d2ad60c21))
 
 ## [4.0.2](https://github.com/remarkablemark/texsvg/compare/v4.0.1...v4.0.2) (2026-09-17)
 
-
 ### Build System
 
-* **deps:** bump svgo from 4.0.2 to 4.1.0 ([#1180](https://github.com/remarkablemark/texsvg/issues/1180)) ([312a309](https://github.com/remarkablemark/texsvg/commit/312a30939f5eb430cccf78483c7de28d566430d5))
-* **deps:** bump yargs from 18.0.0 to 18.1.0 ([#1165](https://github.com/remarkablemark/texsvg/issues/1165)) ([1bca599](https://github.com/remarkablemark/texsvg/commit/1bca599fd83ea19f4c861f8d12ea048eaa8c3505))
+- **deps:** bump svgo from 4.0.2 to 4.1.0 ([#1180](https://github.com/remarkablemark/texsvg/issues/1180)) ([312a309](https://github.com/remarkablemark/texsvg/commit/312a30939f5eb430cccf78483c7de28d566430d5))
+- **deps:** bump yargs from 18.0.0 to 18.1.0 ([#1165](https://github.com/remarkablemark/texsvg/issues/1165)) ([1bca599](https://github.com/remarkablemark/texsvg/commit/1bca599fd83ea19f4c861f8d12ea048eaa8c3505))
 
 ## [4.0.1](https://github.com/remarkablemark/texsvg/compare/v4.0.0...v4.0.1) (2026-07-14)
 
-
 ### Build System
 
-* **deps:** bump mathjax from 4.1.2 to 4.1.3 ([#1144](https://github.com/remarkablemark/texsvg/issues/1144)) ([5130fee](https://github.com/remarkablemark/texsvg/commit/5130fee8c7dc6264e81e43fb2060fc7871fc8627))
-* **deps:** bump svgo from 4.0.1 to 4.0.2 ([#1153](https://github.com/remarkablemark/texsvg/issues/1153)) ([7b136fa](https://github.com/remarkablemark/texsvg/commit/7b136faae3a1fcb0b3a1b04680eefd3158179e76))
+- **deps:** bump mathjax from 4.1.2 to 4.1.3 ([#1144](https://github.com/remarkablemark/texsvg/issues/1144)) ([5130fee](https://github.com/remarkablemark/texsvg/commit/5130fee8c7dc6264e81e43fb2060fc7871fc8627))
+- **deps:** bump svgo from 4.0.1 to 4.0.2 ([#1153](https://github.com/remarkablemark/texsvg/issues/1153)) ([7b136fa](https://github.com/remarkablemark/texsvg/commit/7b136faae3a1fcb0b3a1b04680eefd3158179e76))
 
 ## [4.0.0](https://github.com/remarkablemark/texsvg/compare/v3.0.3...v4.0.0) (2026-06-07)
 
-
 ### ⚠ BREAKING CHANGES
 
-* Target changed from es5 to ES2020
-* texsvg is now a named export instead of a default export
-* MathJax has been upgraded from 3.2.2 to 4.1.2
+- Target changed from es5 to ES2020
+- texsvg is now a named export instead of a default export
+- MathJax has been upgraded from 3.2.2 to 4.1.2
 
 ### Features
 
-* upgrade mathjax from 3.2.2 to 4.1.2 ([c9bed8c](https://github.com/remarkablemark/texsvg/commit/c9bed8c0c45b4027e329bc1bb18d4380daa49863))
-
+- upgrade mathjax from 3.2.2 to 4.1.2 ([c9bed8c](https://github.com/remarkablemark/texsvg/commit/c9bed8c0c45b4027e329bc1bb18d4380daa49863))
 
 ### Bug Fixes
 
-* remove `<mjx-container>` wrapper from SVG output ([a286ee2](https://github.com/remarkablemark/texsvg/commit/a286ee22d6619ef5a5957ef17a47018bf513ef02))
-
+- remove `<mjx-container>` wrapper from SVG output ([a286ee2](https://github.com/remarkablemark/texsvg/commit/a286ee22d6619ef5a5957ef17a47018bf513ef02))
 
 ### Code Refactoring
 
-* replace default export with named export ([e15c299](https://github.com/remarkablemark/texsvg/commit/e15c29902e3f9bd34cd6b135d77244929d2176ed))
-
+- replace default export with named export ([e15c299](https://github.com/remarkablemark/texsvg/commit/e15c29902e3f9bd34cd6b135d77244929d2176ed))
 
 ### Build System
 
-* bump typescript from 5.9.3 to 6.0.3 ([5caaff3](https://github.com/remarkablemark/texsvg/commit/5caaff388c1bdcc924c7502a862bd150da601d57))
-* **deps:** bump yargs from 17 to 18.0.0 ([1793c64](https://github.com/remarkablemark/texsvg/commit/1793c64529452b7826d477828532aa2c758e765e))
+- bump typescript from 5.9.3 to 6.0.3 ([5caaff3](https://github.com/remarkablemark/texsvg/commit/5caaff388c1bdcc924c7502a862bd150da601d57))
+- **deps:** bump yargs from 17 to 18.0.0 ([1793c64](https://github.com/remarkablemark/texsvg/commit/1793c64529452b7826d477828532aa2c758e765e))
 
 ## [3.0.3](https://github.com/remarkablemark/texsvg/compare/v3.0.2...v3.0.3) (2026-03-27)
 
-
 ### Build System
 
-* **package:** fix script prepublishOnly ([19b2f62](https://github.com/remarkablemark/texsvg/commit/19b2f62477753e94a120d4362b1e453d123fb941))
+- **package:** fix script prepublishOnly ([19b2f62](https://github.com/remarkablemark/texsvg/commit/19b2f62477753e94a120d4362b1e453d123fb941))
 
 ## [3.0.2](https://github.com/remarkablemark/texsvg/compare/v3.0.1...v3.0.2) (2026-03-27)
 
-
 ### Miscellaneous Chores
 
-* release 3.0.2 ([06912a7](https://github.com/remarkablemark/texsvg/commit/06912a73a60695ff2941d2869d3c1d3b62ee51a5))
+- release 3.0.2 ([06912a7](https://github.com/remarkablemark/texsvg/commit/06912a73a60695ff2941d2869d3c1d3b62ee51a5))
 
 ## [3.0.1](https://github.com/remarkablemark/texsvg/compare/v3.0.0...v3.0.1) (2026-03-26)
 
-
 ### Build System
 
-* **deps:** bump svgo from 4.0.0 to 4.0.1 ([#1048](https://github.com/remarkablemark/texsvg/issues/1048)) ([c595cb0](https://github.com/remarkablemark/texsvg/commit/c595cb0519586b2a4f47caea84ef4323aadf9977))
+- **deps:** bump svgo from 4.0.0 to 4.0.1 ([#1048](https://github.com/remarkablemark/texsvg/issues/1048)) ([c595cb0](https://github.com/remarkablemark/texsvg/commit/c595cb0519586b2a4f47caea84ef4323aadf9977))
 
 ## [3.0.0](https://github.com/remarkablemark/texsvg/compare/v2.3.1...v3.0.0) (2025-09-13)
 
-
 ### ⚠ BREAKING CHANGES
 
-* **deps:** bump svgo from 3.3.2 to 4.0.0
+- **deps:** bump svgo from 3.3.2 to 4.0.0
 
 ### Build System
 
-* **deps:** bump svgo from 3.3.2 to 4.0.0 ([#870](https://github.com/remarkablemark/texsvg/issues/870)) ([d7a8890](https://github.com/remarkablemark/texsvg/commit/d7a889028457e3c18b90a5b5116acf95cac750ac))
+- **deps:** bump svgo from 3.3.2 to 4.0.0 ([#870](https://github.com/remarkablemark/texsvg/issues/870)) ([d7a8890](https://github.com/remarkablemark/texsvg/commit/d7a889028457e3c18b90a5b5116acf95cac750ac))
 
 ## [2.3.1](https://github.com/remarkablemark/texsvg/compare/v2.3.0...v2.3.1) (2025-02-13)
 
-
 ### Bug Fixes
 
-* remove `convertPathData` from svgo config ([b1455d0](https://github.com/remarkablemark/texsvg/commit/b1455d0182c39573736999285eda21923539db81)), closes [#762](https://github.com/remarkablemark/texsvg/issues/762)
+- remove `convertPathData` from svgo config ([b1455d0](https://github.com/remarkablemark/texsvg/commit/b1455d0182c39573736999285eda21923539db81)), closes [#762](https://github.com/remarkablemark/texsvg/issues/762)
 
 ## [2.3.0](https://github.com/remarkablemark/texsvg/compare/v2.2.2...v2.3.0) (2025-02-13)
 
-
 ### Features
 
-* add option optimize to library and binary (defaults to true) ([0d6f9fb](https://github.com/remarkablemark/texsvg/commit/0d6f9fbf8220f98109bf508084c4f71a2d7110f3))
+- add option optimize to library and binary (defaults to true) ([0d6f9fb](https://github.com/remarkablemark/texsvg/commit/0d6f9fbf8220f98109bf508084c4f71a2d7110f3))
 
 ## [2.2.2](https://github.com/remarkablemark/texsvg/compare/v2.2.1...v2.2.2) (2024-08-29)
 
-
 ### Continuous Integration
 
-* **github:** publish package to npm registry with provenance ([8048fcf](https://github.com/remarkablemark/texsvg/commit/8048fcf796300d882ceaeb46208bd24a8153c05f))
+- **github:** publish package to npm registry with provenance ([8048fcf](https://github.com/remarkablemark/texsvg/commit/8048fcf796300d882ceaeb46208bd24a8153c05f))
 
 ## [2.2.1](https://github.com/remarkablemark/texsvg/compare/v2.2.0...v2.2.1) (2024-05-09)
 
-
 ### Build System
 
-* **deps:** bump svgo from 3.3.0 to 3.3.2 ([#574](https://github.com/remarkablemark/texsvg/issues/574)) ([9f0c33a](https://github.com/remarkablemark/texsvg/commit/9f0c33a19b86c527a5f93a4d531cf01e2a40ed54))
+- **deps:** bump svgo from 3.3.0 to 3.3.2 ([#574](https://github.com/remarkablemark/texsvg/issues/574)) ([9f0c33a](https://github.com/remarkablemark/texsvg/commit/9f0c33a19b86c527a5f93a4d531cf01e2a40ed54))
 
 ## [2.2.0](https://github.com/remarkablemark/texsvg/compare/v2.1.0...v2.2.0) (2024-05-08)
 
-
 ### Build System
 
-* **deps:** bump svgo from 3.2.0 to 3.3.0 ([#571](https://github.com/remarkablemark/texsvg/issues/571)) ([2505e16](https://github.com/remarkablemark/texsvg/commit/2505e16ebe366a4c37f74720a1362d80e62a82d4))
+- **deps:** bump svgo from 3.2.0 to 3.3.0 ([#571](https://github.com/remarkablemark/texsvg/issues/571)) ([2505e16](https://github.com/remarkablemark/texsvg/commit/2505e16ebe366a4c37f74720a1362d80e62a82d4))
 
 ## [2.1.0](https://github.com/remarkablemark/texsvg/compare/v2.0.7...v2.1.0) (2024-01-13)
 
-
 ### Build System
 
-* **deps:** bump svgo from 3.1.0 to 3.2.0 ([#465](https://github.com/remarkablemark/texsvg/issues/465)) ([b9f8847](https://github.com/remarkablemark/texsvg/commit/b9f884703c7907a60a9eefedf6917697b071200c))
+- **deps:** bump svgo from 3.1.0 to 3.2.0 ([#465](https://github.com/remarkablemark/texsvg/issues/465)) ([b9f8847](https://github.com/remarkablemark/texsvg/commit/b9f884703c7907a60a9eefedf6917697b071200c))
 
 ## [2.0.7](https://github.com/remarkablemark/texsvg/compare/v2.0.6...v2.0.7) (2023-12-16)
 
-
 ### Build System
 
-* **deps:** bump svgo from 3.0.5 to 3.1.0 ([#448](https://github.com/remarkablemark/texsvg/issues/448)) ([cc008fe](https://github.com/remarkablemark/texsvg/commit/cc008fe19578315a700e315d42ac71aa879e51a3))
+- **deps:** bump svgo from 3.0.5 to 3.1.0 ([#448](https://github.com/remarkablemark/texsvg/issues/448)) ([cc008fe](https://github.com/remarkablemark/texsvg/commit/cc008fe19578315a700e315d42ac71aa879e51a3))
 
 ## [2.0.6](https://github.com/remarkablemark/texsvg/compare/v2.0.5...v2.0.6) (2023-12-02)
 
-
 ### Build System
 
-* **deps:** bump svgo from 3.0.4 to 3.0.5 ([#436](https://github.com/remarkablemark/texsvg/issues/436)) ([a7e4503](https://github.com/remarkablemark/texsvg/commit/a7e450345dc6ed3bed6781ada3aca12fc2a2becd))
+- **deps:** bump svgo from 3.0.4 to 3.0.5 ([#436](https://github.com/remarkablemark/texsvg/issues/436)) ([a7e4503](https://github.com/remarkablemark/texsvg/commit/a7e450345dc6ed3bed6781ada3aca12fc2a2becd))
 
 ## [2.0.5](https://github.com/remarkablemark/texsvg/compare/v2.0.4...v2.0.5) (2023-11-23)
 
-
 ### Build System
 
-* **deps:** bump svgo from 3.0.3 to 3.0.4 ([#420](https://github.com/remarkablemark/texsvg/issues/420)) ([64953ca](https://github.com/remarkablemark/texsvg/commit/64953ca336920ccd33b63abb4d2f480658be1373))
+- **deps:** bump svgo from 3.0.3 to 3.0.4 ([#420](https://github.com/remarkablemark/texsvg/issues/420)) ([64953ca](https://github.com/remarkablemark/texsvg/commit/64953ca336920ccd33b63abb4d2f480658be1373))
 
 ## [2.0.4](https://github.com/remarkablemark/texsvg/compare/v2.0.3...v2.0.4) (2023-11-09)
 
-
 ### Bug Fixes
 
-* **package:** add "types" field ([6a51d72](https://github.com/remarkablemark/texsvg/commit/6a51d728386673375532bf2ccce53e6a633e25b0))
+- **package:** add "types" field ([6a51d72](https://github.com/remarkablemark/texsvg/commit/6a51d728386673375532bf2ccce53e6a633e25b0))
 
 ## [2.0.3](https://github.com/remarkablemark/texsvg/compare/v2.0.2...v2.0.3) (2023-11-09)
 
-
 ### Build System
 
-* **deps:** bump svgo from 3.0.2 to 3.0.3 ([#403](https://github.com/remarkablemark/texsvg/issues/403)) ([600af80](https://github.com/remarkablemark/texsvg/commit/600af80a00152323cbd623ea189a2791ec8d0c57))
+- **deps:** bump svgo from 3.0.2 to 3.0.3 ([#403](https://github.com/remarkablemark/texsvg/issues/403)) ([600af80](https://github.com/remarkablemark/texsvg/commit/600af80a00152323cbd623ea189a2791ec8d0c57))
 
 ## 2.0.2 (2023-04-12)
 
