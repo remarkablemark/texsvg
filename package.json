@@ -52,7 +52,7 @@
     "@eslint/js": "10.0.1",
     "@types/node": "26.6.6",
     "@types/yargs": "17.0.35",
-    "@vitest/coverage-v8": "5.0.5",
+    "@vitest/coverage-v8": "5.1.0",
     "eslint": "10.14.0",
     "eslint-plugin-prettier": "5.5.7",
     "eslint-plugin-simple-import-sort": "14.0.0",
@@ -62,7 +62,7 @@
     "prettier": "3.9.10",
     "typescript": "6.0.3",
     "typescript-eslint": "8.72.1",
-    "vitest": "5.0.5"
+    "vitest": "5.1.0"
   },
   "files": [
     "cjs/"
